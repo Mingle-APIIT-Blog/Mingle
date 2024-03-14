@@ -27,7 +27,7 @@
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><img src="assets/images/BrandLogo.png" width="180px" height="60px"></a>
+          <a class="navbar-brand" href="index.php"><img src="assets/images/BrandLogo.png" width="180px" height="60px"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -344,7 +344,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="">Services</a></li>
           <li><a href="">Mentoring Sessions</a></li>
-          <li><a href="index.html">About Us</a></li>
+          <li><a href="aboutUs.html">About Us</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -381,7 +381,7 @@
     </div>
 </div>
  <div class="copyrights">
- <p>copyright &copy;2024 powered by CHAM<span></span></p>
+ <p>copyright &copy;2024 powered by MACH<span></span></p>
  </div>
 
 </footer>

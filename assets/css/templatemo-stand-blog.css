@@ -797,7 +797,7 @@ ul.page-numbers li a:hover {
 	position: absolute; /*positions an element relative to its nearest positioned class*/
 	left:0;
 	bottom: -10px;
-	background-color: #1E90FF;/*color of the line under the h4*/
+	background-color: #1ea5c3;/*color of the line under the h4*/
 	height: 2px;
 	box-sizing: border-box;
 	width: 70px; /*line under the h4*/
@@ -1061,44 +1061,135 @@ footer p a:hover {
 }
 
 
-/* About Us */
-
-.about-us {
-	margin-top: 100px;
+/* About Us*/
+.aboutus-heading-text{
+	font-size: 35px;
+	color: black;
+	letter-spacing: 0.5px;
+	text-transform: capitalize;
+	margin: 10px 0px 12px 0px;
 	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 15px;
 }
 
-.about-us img {
-	width: 100%;
-	overflow: hidden;
-}
-
-.about-us p {
-	margin: 40px 0px;
-	border-bottom: 1px solid #eee;
-	padding-bottom: 40px;
-}
-
-.about-us ul li {
-	display: inline-block;
-	margin: 0px 5px;
-}
-
-.about-us ul li a {
-	width: 40px;
-	height: 40px;
+.about-content{
+	margin: 0px 40px 10px 40px;
 	text-align: center;
-	line-height: 40px;
-	display: inline-block;
-	background-color: #212931;
-	color: #fff;
-	border-radius: 50%;
-	transition: all .3s;
+	font-weight: 400;
+	font-size: 17px;
 }
 
-.about-us ul li a:hover {
-	background-color: #1ea5c3;
+/*about row of icons and text */
+.icon-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+	margin-bottom: 25px;
 }
+
+.icon-item {
+    text-align: center;
+}
+
+.icon-item i {
+    font-size: 50px;
+    margin-bottom: 10px;
+	color: #1ea5c3;
+}
+
+.icon-item p {
+    font-size: 15px;
+    color: #666;
+}
+
+.icon-item #icon-text{
+	font-size: 24px;
+    color: #666;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .icon-row {
+        flex-wrap: wrap;
+		margin-bottom: 0px;
+		padding-bottom: 0px;
+    }
+
+    .icon-item {
+        width: 50%; 
+		padding-bottom: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .icon-item {
+        width: 100%; 
+    }
+}
+
+/* About us of school card styling */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+.school-card {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.school-card img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.school-card h5 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.school-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.map {
+    height: 150px; 
+    border-radius: 6px; 
+	width: calc(33.33% - 20px);
+}
+
+@media (max-width: 768px) {
+    .school-card {
+        width: calc(100% - 15px); 
+        margin-bottom: 15px; 
+    }
+    .map {
+        height: 150px; 
+        border-radius: 6px; 
+		width: calc(33.33% - 20px);
+    }
+}
+
+
+
+
 
 
 /* Responsive Style */
