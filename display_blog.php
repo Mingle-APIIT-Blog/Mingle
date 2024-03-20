@@ -118,6 +118,12 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             transition: all .3s;
         }
     </style>
+
+<script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this blog post?");
+        }
+    </script>
 </head>
 
 <body>

@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset(
 
         // Get user ID from session
         $userId = $_SESSION['user_id'];
-        $userType = $_SESSION['user_type'];
+        $userType = $_SESSION['user_type']; //to redirect user after uploading to specific dashboard depending on user type
         $fullName = isset($_SESSION['full_name']) ? $_SESSION['full_name'] : '';
 
         // Handle file upload

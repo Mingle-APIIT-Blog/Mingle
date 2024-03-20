@@ -19,6 +19,7 @@ if (isset($_SESSION['form_data'])) {
 <head>
     <title>Blog Post Form</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,19 +57,37 @@ if (isset($_SESSION['form_data'])) {
         textarea {
             resize: vertical;
         }
-        input[type="submit"] {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
+        .submit-button{
+            display: inline-block;
+            font-size: 16px;
+            padding: 8px 10px;
+            border: 1px solid #1ea5c3;
             border-radius: 5px;
+            background-color: #1ea5c3;
+            color: #fff;
+            text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
+
+        .back-button {
+            font-size: 16px;
+            display: inline-block;
+            padding: 8px 10px;
+            border: 1px solid #1ea5c3;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #1ea5c3;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+        }
+        input[type="submit"]:hover,
+        .back-button:hover {
+            background-color: #dbd9d9;
+            border-color: #fff;
+            color: #1ea5c3;
         }
         .error-message {
             color: #ff0000;
@@ -78,13 +97,10 @@ if (isset($_SESSION['form_data'])) {
 </head>
 <body>
     <div class="container">
-        <h1>Blog Post Form</h1>
+        <h1>Create Your Blog Post</h1>
         <form id="blogForm" method="post" action="upload-blog.php" enctype="multipart/form-data" onsubmit="return validateForm()">
             <label for="blogTitle">Blog Title:</label><br>
             <input type="text" id="blogTitle" name="blogTitle" value="<?php echo htmlspecialchars($blogTitle); ?>"><br>
-            
-            <!--label for="bloggerName">Blogger Name:</label><br>
-            <input type="text" id="bloggerName" name="bloggerName" value="<!?php echo htmlspecialchars($bloggerName); ?>"><br-->
             
             <label for="blogImage">Blog Image:</label><br>
             <input type="file" id="blogImage" name="blogImage"><br>
@@ -92,7 +108,8 @@ if (isset($_SESSION['form_data'])) {
             <label for="blogContent">Blog Content:</label><br>
             <textarea id="blogContent" name="blogContent" rows="6" cols="50"><?php echo htmlspecialchars($blogContent); ?></textarea><br>
             
-            <input type="submit" value="Submit">
+            <input class="submit-button" type="submit" value="Upload">
+            <button class="back-button" onclick="goBack()">Back</button>
         </form>
         <div id="errorMessage" class="error-message"></div>
     </div>
@@ -109,6 +126,9 @@ if (isset($_SESSION['form_data'])) {
             }
 
             return true; 
+        }
+
+        function goBack() {
             window.history.back();
         }
     </script>

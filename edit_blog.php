@@ -9,6 +9,13 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+$userType = $_SESSION['user_type']; //to redirect user to user specific dashboard after successful update of post
+if (empty($userType)) {
+    header('Location: index.php'); // Redirect to index.php if user type is not set
+    exit;
+}
+
+
 // Retrieve blog post data for editing
 if (isset($_GET['postId'])) {
     $postId = $_GET['postId'];
@@ -64,24 +71,43 @@ if (isset($_GET['postId'])) {
             padding-top: 4px;
             padding-bottom: 4px;
         }
-        input[type="submit"] {
+        .update-button{
             display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
+            font-size: 16px;
+            padding: 8px 10px;
+            border: 1px solid #1ea5c3;
             border-radius: 5px;
+            background-color: #1ea5c3;
+            color: #fff;
+            text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
+
+        .back-button {
+            font-size: 16px;
+            display: inline-block;
+            padding: 8px 10px;
+            border: 1px solid #1ea5c3;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #1ea5c3;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 10px;
+        }
+        input[type="submit"]:hover,
+        .back-button:hover {
+            background-color: #dbd9d9;
+            border-color: #fff;
+            color: #1ea5c3;
         }
     </style>
     </head>
     <body>
         <div class="container">
-            <h1>Edit Blog Post</h1>
+            <h1>Edit Your Blog Post</h1>
             <form method="post" action="edit_blog.php">
                 <label for="blogTitle">Title:</label><br>
                 <div class="update-blog-title">
@@ -91,7 +117,8 @@ if (isset($_GET['postId'])) {
                 <textarea id="blogContent" name="blogContent" rows="8"><?php echo htmlspecialchars($blogContent); ?></textarea><br>
 
                 <input type="hidden" name="postId" value="<?php echo $postId; ?>">
-                <input type="submit" value="Update">
+                <input class="update-button" type="submit" value="Update">
+                <button class="back-button" onclick="goBack()">Back</button>
             </form>
         </div>
     </body>
@@ -111,8 +138,22 @@ if (isset($_GET['postId'])) {
     $stmt->execute();
 
     $_SESSION['success_message'] = "Blog post updated successfully.";
-    header('Location: display_blog.php'); // Redirect to display_blog.php after successful update
-    exit;
+  // Redirect to the appropriate dashboard based on user type
+  switch ($userType) {
+    case 'Student':
+        header('Location: student_dashboard.php');
+        break;
+    case 'Lecturer':
+        header('Location: lecturer_dashboard.php');
+        break;
+    case 'Alumni':
+        header('Location: alumni_dashboard.php');
+        break;
+    default:
+        header('Location: index.php'); 
+        break;
+}
+exit;
 } else {
     // Redirect if postId is not provided or request method is not POST
     header('Location: index.php');

@@ -60,11 +60,10 @@ h1,h2,h3,h4,h5,h6 {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-image: url(../images/apiit-banner.jpg);
-	background-color: rgba(0, 0, 0, 0.336);
 }
 
 .page-heading .text-content h4 {
-	color: #1ea5c3;
+	color: #3ecbeb;
 	font-size: 18px;
 	text-transform: uppercase;
 	font-weight: 900;
@@ -73,6 +72,33 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .page-heading .text-content h2 {
+	color: #fff;
+	font-size: 36px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.about-page-heading{
+	margin: 0px 10px;
+	padding: 120px 0px;
+	text-align: left;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url(../images/about-banner.jpg); 
+}
+
+.about-page-heading .text-content h4 {
+	color: #3ecbeb;
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: 900;
+	letter-spacing: 0.5px;
+	margin-bottom: 15px;
+}
+
+.about-page-heading .text-content h2 {
 	color: #fff;
 	font-size: 36px;
 	font-weight: 700;
