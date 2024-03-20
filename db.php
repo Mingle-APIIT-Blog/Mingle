@@ -1,7 +1,7 @@
 <?php
 // db.php: Database connection details
 $host = 'localhost';
-$dbName = 'university_db';
+$dbName = 'uni_db';
 $username = 'root';
 $password = '';
 

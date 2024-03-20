@@ -59,7 +59,7 @@ h1,h2,h3,h4,h5,h6 {
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-image: url(../images/heading-bg.jpg);
+	background-image: url(../images/apiit-banner.jpg);
 }
 
 .page-heading .text-content h4 {
@@ -338,7 +338,7 @@ header .navbar {
 
 .call-to-action .main-content {
 	padding: 40px;
-	background-image: url(../images/cta-bg.jpg);
+	background-image: url(../images/apiit-banner.jpg);
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -493,7 +493,6 @@ header .navbar {
 	text-align: center;
 }
 
-
 ul.page-numbers {
 	text-align: center;
 	margin-bottom: 30px;
@@ -518,10 +517,11 @@ ul.page-numbers li a {
 }
 
 ul.page-numbers li.active a {
-	background-color: #1ea5c3;
-	border-color: #1ea5c3;
-	color: #fff;
+    background-color: #1ea5c3;
+    border-color: #1ea5c3;
+    color: #fff;
 }
+
 
 ul.page-numbers li a:hover {
 	color: #1ea5c3;
@@ -1147,6 +1147,7 @@ footer p a:hover {
     border-radius: 8px;
     padding: 20px;
     box-sizing: border-box;
+	position: relative;
 }
 
 .school-card img {
@@ -1169,25 +1170,21 @@ footer p a:hover {
     margin-bottom: 15px;
 }
 
-.map {
-    height: 150px; 
-    border-radius: 6px; 
-	width: calc(33.33% - 20px);
+.school-card iframe {
+		max-width: 100%;
+		height: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 415px) {
     .school-card {
-        width: calc(100% - 15px); 
-        margin-bottom: 15px; 
+        width: calc(100% - 30px); /* Adjusted width to fit within the screen */
+        margin-bottom: 15px;
     }
-    .map {
-        height: 150px; 
-        border-radius: 6px; 
-		width: calc(33.33% - 20px);
+    .school-card iframe {
+		max-width: 100%;
+		height: auto;
     }
 }
-
-
 
 
 

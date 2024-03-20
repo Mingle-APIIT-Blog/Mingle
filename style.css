@@ -1,0 +1,390 @@
+/*DASHBOARD STYLINGS*/
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f4f4;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative; /* Set container as relative positioning */
+}
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1ea5c3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color: #1ea5c3;
+}
+.options {
+    text-align: center;
+}
+.option-btn {
+    margin: 10px;
+}
+.logout-btn {
+    color: #1ea5c3;
+    text-decoration: none;
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+}
+
+/*login page logo styling*/
+.loginPg-logos {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.loginPg-logos img {
+	width: 100%;
+	max-width: 250px; 
+}
+
+/*Login page button stylings*/
+.btn-primary {
+	background-color: #1ea5c3; 
+	border-color: #1ea5c3;
+}
+.btn-primary:hover {
+	background-color: #dbd9d9; 
+	border-color: #fff; 
+	color: #1ea5c3;
+}
+.back-primary {
+	border-color: #1ea5c3; 
+    background-color: transparent;
+	color: #1ea5c3;
+	margin-left: 10px;
+}
+.back-primary:hover {
+	background-color: #dbd9d9; 
+	border-color: #fff; 
+	color: #1ea5c3;
+}
+
+/* Navigation Bar Styles */
+nav.navbar { 
+    background-color: #24262b; 
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-size: 24px; 
+    padding-left: 20px;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+    margin-right: 15px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Navigation Bar Styles for smaller screens */
+@media (max-width: 991px) {    
+    .navbar-nav .nav-link {
+        padding-left: 20px; 
+        font-size: 14px;
+    }
+}
+
+/*footer*/
+.footer {
+    background-color: #24262b;
+    padding: 70px 0 0 0;
+    margin-top:0;
+}
+.container-footer {
+    max-width: 1170px; /* Maximum width for the footer container */
+    margin:auto; /* Center-align the footer container horizontally */
+    margin-bottom:25px;
+}
+.row-footer {
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap to the next line when they reach the edge of the container */
+}
+.row-footer ul {
+    list-style: none; /* Remove default bullet points from the unordered list */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.footer-col {
+    width: 25%;
+    padding: 0 15px;
+    margin-bottom: 20px; /*  to separate each column */
+    border: 1px solid transparent; /* transparent border to prevent margin collapsing */
+}
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative; /*to adjust the position of the element relative to its normal position*/
+}
+.footer-col h4::before {
+    content: ''; /* Empty content */
+    position: absolute; /*positions an element relative to its nearest positioned class*/
+    left:0;
+    bottom: -10px;
+    background-color: #1ea5c3;/*color of the line under the h4*/
+    height: 2px;
+    box-sizing: border-box;
+    width: 70px; /*line under the h4*/
+}
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block; /* Display the links as block elements */
+    transition: all 0.3s ease; /* Add transition effect for smooth hover effect */
+    padding-left: 0; /* Reset padding left */
+}
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px; /* Add padding to the left on hover */
+}
+
+.footer-col .social-links a {
+    display: inline-block; /* Display the social media links as inline-block elements */
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255,255,255,0.2);
+    margin:0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease; /* Add transition effect for smooth hover effect */
+}
+.footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+/*email- input*/
+
+.footer-form input {
+    width:230px;
+    height:35px;
+    border-radius:4px;
+    text-align:center;
+    margin-top:8px;
+    margin-bottom:20px;
+    outline:none; /* Remove outline on focus */
+    border:none;
+}
+
+/*submit*/ 
+.footer-form button {
+    background:transparent;
+    border:2px solid #fff;
+    color:#fff;
+    border-radius: 30px;
+    padding:7px 30px;
+    font-size:15px;
+    cursor:pointer; /* Set cursor to pointer for the submit button */
+}
+
+
+.copyrights {
+    background:#181818;
+    width:100%;
+    padding-bottom:10px;
+    text-align:center;
+}
+
+.copyrights p {
+    font-size:14px;
+    word-spacing: 2px; /* Spacing between words */
+    text-transform:capitalize; /* Capitalize the text */
+    color: #C0C0C0;
+    padding-top: 20px;
+}
+
+.copyrights span {
+    text-transform:uppercase; /* Uppercase the text in the span */
+    opacity: .4; /* Opacity of the text in the span */
+    font-weight:200;
+}
+
+/*responsive-footer*/
+@media(max-width: 957px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+  }
+}
+
+
+
+/* About Us*/
+.aboutus-heading-text{
+    font-size: 35px;
+    color: black;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    margin: 10px 0px 12px 0px;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+        /*About us pg banner*/
+        .aboutus-banner {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .aboutus-banner img {
+            width: 100%;
+            display: block;
+        }
+        @media(max-width: 600px){
+            .aboutus-banner img{
+                 height: 250px;
+            }
+        }
+
+.about-content {
+    margin: 0px 40px 10px 40px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+/*about row of icons and text */
+.icon-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.icon-item {
+    text-align: center;
+}
+
+.icon-item i {
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: #1ea5c3;
+}
+
+.icon-item p {
+    font-size: 15px;
+    color: #666;
+}
+
+.icon-item #icon-text{
+    font-size: 24px;
+    color: #666;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .icon-row {
+        flex-wrap: wrap;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+
+    .icon-item {
+        width: 50%; 
+        padding-bottom: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .icon-item {
+        width: 100%; 
+    }
+}
+
+/* About us of school card styling */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.school-card {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    border: 1px solid #bebebe;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.school-card img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.school-card h5 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #555555;
+}
+
+.school-card p {
+    font-size: 14px;
+    color: #555555;
+    margin-bottom: 15px;
+}
+
+.school-card iframe {
+        max-width: 100%;
+        height: auto;
+}
+
+@media (max-width: 415px) {
+    .school-card {
+        width: calc(100% - 30px); /* Adjusted width to fit within the screen */
+        margin-bottom: 15px;
+    }
+    .school-card iframe {
+        max-width: 100%;
+        height: auto;
+    }
+}
