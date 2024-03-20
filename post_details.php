@@ -13,7 +13,7 @@ if (isset($_GET['postId'])) {
 
     // Check if the post exists
     if ($post) {
-        ?>
+?>
 
         <!DOCTYPE html>
         <html lang="en">
@@ -65,9 +65,9 @@ if (isset($_GET['postId'])) {
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Mentoring Sessions</a>
                                 </li>
-                                <li class="nav-item">
+                                <button class="login-button">
                                     <a class="nav-link" href="login.html">Login</a>
-                                </li>
+                                </button>
                             </ul>
                         </div>
                     </div>
@@ -75,29 +75,29 @@ if (isset($_GET['postId'])) {
             </header>
 
             <!-- Banner Starts Here -->
-  <div class="heading-page header-text">
-    <section class="page-heading">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="text-content">
-            <h4><?php echo htmlspecialchars($post['author_name']); ?></h4>
-            <h2><?php echo htmlspecialchars($post['blogTitle']); ?></h2>
+            <div class="heading-page header-text">
+                <section class="page-heading">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="text-content">
+                                    <h4><?php echo htmlspecialchars($post['author_name']); ?></h4>
+                                    <h2><?php echo htmlspecialchars($post['blogTitle']); ?></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
 
-  <!-- Banner Ends Here -->
+            <!-- Banner Ends Here -->
 
             <section class="blog-posts grid-system">
                 <div class="container">
 
                     <div class="blog-post">
                         <div class="blog-thumb">
-                            <?php if (!empty($post['blogImage'])): ?>
+                            <?php if (!empty($post['blogImage'])) : ?>
                                 <img src="data:image/jpeg;base64,<?php echo $post['blogImage']; ?>" alt="Blog Image">
                             <?php endif; ?>
                         </div>
@@ -156,61 +156,61 @@ if (isset($_GET['postId'])) {
             <script src="assets/js/isotope.js"></script>
             <script src="assets/js/accordions.js"></script>
         </body>
-        
-<footer class="footer">
-  <div class="container-footer">
-    <div class="row-footer">
-      <div class="footer-col">
-        <h4>QUICK LINKS</h4>
-        <ul>
-          <li><a href="index.php">Home</a></li>
-          <li><a href="">Services</a></li>
-          <li><a href="">Mentoring Sessions</a></li>
-          <li><a href="aboutUs.html">About Us</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>AREAS OF STUDY</h4>
-        <ul>
-          <li><a href="https://apiit.lk/undergraduate/business-degrees/">Business</a></li>
-          <li><a href="https://apiit.lk/undergraduate/computing-degrees/">IT</a></li>
-          <li><a href="https://apiit.lk/undergraduate/law-degrees/">Law</a></li>
-          <li><a href="https://apiit.lk/foundation/">Foundation</a></li>
-          <li><a href="https://apiit.lk/courses/institute-of-chartered-accountants-in-england-and-wales-icaew/">Professional</a></li>
-        </ul>
-     <br>
-      <!--div class="donate-but">
+
+        <footer class="footer">
+            <div class="container-footer">
+                <div class="row-footer">
+                    <div class="footer-col">
+                        <h4>QUICK LINKS</h4>
+                        <ul>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="">Services</a></li>
+                            <li><a href="">Mentoring Sessions</a></li>
+                            <li><a href="aboutUs.html">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>AREAS OF STUDY</h4>
+                        <ul>
+                            <li><a href="https://apiit.lk/undergraduate/business-degrees/">Business</a></li>
+                            <li><a href="https://apiit.lk/undergraduate/computing-degrees/">IT</a></li>
+                            <li><a href="https://apiit.lk/undergraduate/law-degrees/">Law</a></li>
+                            <li><a href="https://apiit.lk/foundation/">Foundation</a></li>
+                            <li><a href="https://apiit.lk/courses/institute-of-chartered-accountants-in-england-and-wales-icaew/">Professional</a></li>
+                        </ul>
+                        <br>
+                        <!--div class="donate-but">
              <a href="purchase.html#donation-types-main" class="donate-button" ">DONATE</a>
      </div-->
-      </div>
-   
-      <div class="footer-col">
-        <h4>FOLLOW US</h4>
-        <div class="social-links">
-          <a href="https://www.facebook.com/APIITofficial" target="_blank"><i class="fa-brands fa-facebook"></i>
-          <a href="https://twitter.com/apiitsl?lang=en" target="_blank"><i class="fa-brands fa-twitter"></i>
-          <a href="https://www.instagram.com/apiitsl/" target="_blank"><i class="fa-brands fa-instagram"></i>
-          <a href="https://www.youtube.com/@APIITedu" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-          <a href="https://www.linkedin.com/company/apiitsl" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-        </div>
-      </div>
-      <br>
-      <div class="footer-col">
-        <ul>
-          <li> <img src="assets/images/apiit-logo.png" alt="" width=""></li>
-        </ul>
-      </div>
-    </div>
-</div>
- <div class="copyrights">
- <p>copyright &copy;2024 powered by MACH<span></span></p>
- </div>
+                    </div>
 
-</footer>
+                    <div class="footer-col">
+                        <h4>FOLLOW US</h4>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/APIITofficial" target="_blank"><i class="fa-brands fa-facebook"></i>
+                                <a href="https://twitter.com/apiitsl?lang=en" target="_blank"><i class="fa-brands fa-twitter"></i>
+                                    <a href="https://www.instagram.com/apiitsl/" target="_blank"><i class="fa-brands fa-instagram"></i>
+                                        <a href="https://www.youtube.com/@APIITedu" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                                        <a href="https://www.linkedin.com/company/apiitsl" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="footer-col">
+                        <ul>
+                            <li> <img src="assets/images/apiit-logo.png" alt="" width=""></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyrights">
+                <p>copyright &copy;2024 powered by MACH<span></span></p>
+            </div>
+
+        </footer>
 
         </html>
 
-        <?php
+<?php
         exit(); // Stop further execution of the script after displaying the post
     }
 }

@@ -13,7 +13,8 @@ if (isset($_SESSION['form_data'])) {
     $blogContent = isset($form_data['blogContent']) ? $form_data['blogContent'] : '';
     unset($_SESSION['form_data']); // Clear session data after populating form fields
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Blog Post Form</title>
@@ -99,15 +100,16 @@ if (isset($_SESSION['form_data'])) {
     <script>
         function validateForm() {
             var title = document.getElementById('blogTitle').value.trim();
-            var name = document.getElementById('bloggerName').value.trim();
+            var image = document.getElementById('blogImage').value.trim();
             var content = document.getElementById('blogContent').value.trim();
 
-            if (title === '' || name === '' || content === '') {
+            if (title === '' || image === '' || content === '') {
                 document.getElementById('errorMessage').innerText = 'Please fill in all fields.';
                 return false; // Prevent form submission
             }
 
-            return true; // Allow form submission
+            return true; 
+            window.history.back();
         }
     </script>
 </body>

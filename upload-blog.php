@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset(
 
         // Get user ID from session
         $userId = $_SESSION['user_id'];
+        $userType = $_SESSION['user_type'];
         $fullName = isset($_SESSION['full_name']) ? $_SESSION['full_name'] : '';
 
         // Handle file upload
@@ -34,7 +35,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset(
         try {
             $stmt->execute();
             $_SESSION['success_message'] = "Blog post submitted successfully.";
-            header('Location: display_blog.php'); // Redirect to display_blog.php after successful submission
+            // Redirect to the appropriate dashboard based on user type
+            switch ($userType) {
+                case 'Student':
+                    header('Location: student_dashboard.php');
+                    break;
+                case 'Lecturer':
+                    header('Location: lecturer_dashboard.php');
+                    break;
+                case 'Alumni':
+                    header('Location: alumni_dashboard.php');
+                    break;
+                default:
+                    header('Location: index.php'); // Redirect to index.php if user type is unknown
+                    break;
+            }
             exit;
         } catch (PDOException $e) {
             $_SESSION['error_message'] = "Error: " . $e->getMessage();
@@ -51,3 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset(
     exit;
 }
 ?>
+
+
+
