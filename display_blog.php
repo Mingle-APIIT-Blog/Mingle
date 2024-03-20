@@ -23,101 +23,10 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <head>
     <title>Blog Posts</title>
-    <!--link rel="stylesheet" type="text/css" href="styles.css-->
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
     <!-- Add Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .blog-container {
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-            /* Adjust top padding for the whole container */
-        }
-
-        .blog-post {
-            display: flex;
-            margin-bottom: 20px;
-            background-color: transparent;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-            /* Ensure position relative for absolute positioning of action buttons */
-            padding-top: 20px;
-            /* Adjust top padding for each card */
-        }
-
-        .blog-thumb {
-            flex: 1;
-            padding: 10px;
-            margin-top: 20px;
-            /* Adjust top margin for the image */
-        }
-
-        .blog-thumb img {
-            width: 100%;
-            height: auto;
-        }
-
-        .blog-content {
-            flex: 2;
-            padding: 10px;
-        }
-
-        .blog-info {
-            margin-bottom: 10px;
-            padding-top: 10px;
-            /* Adjust top padding for the author's name */
-        }
-
-        .blog-actions {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .blog-actions button {
-            margin-left: 5px;
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
-
-        .blog-info h4 {
-            padding-bottom: 15px;
-            font-size: 20px;
-            text-transform: capitalize;
-            letter-spacing: 0.5px;
-            font-weight: 900;
-            color: #20232e;
-        }
-
-
-        .fa-edit,
-        .fa-trash-alt {
-            font-size: 18px;
-        }
-
-        .post-info li {
-            display: inline-block;
-            margin-right: 8px;
-        }
-
-        .post-info li:first-child:after {
-            content: '|';
-            color: #aaa;
-            margin-left: 8px;
-        }
-
-
-        .post-info li a {
-            font-size: 14px;
-            color: #aaa;
-            font-weight: 400;
-            transition: all .3s;
-        }
-    </style>
 
 <script>
         function confirmDelete() {

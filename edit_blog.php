@@ -34,76 +34,8 @@ if (isset($_GET['postId'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit Blog Post</title>
-        <link rel="stylesheet" href="styles.css">
-        <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            font-weight: bold;
-        }
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            resize: vertical;
-        }
-        .update-blog-title{
-            padding-top: 5px;
-            padding-bottom: 20px;
-        }
-        #blogTitle{
-            padding-top: 4px;
-            padding-bottom: 4px;
-        }
-        .update-button{
-            display: inline-block;
-            font-size: 16px;
-            padding: 8px 10px;
-            border: 1px solid #1ea5c3;
-            border-radius: 5px;
-            background-color: #1ea5c3;
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .back-button {
-            font-size: 16px;
-            display: inline-block;
-            padding: 8px 10px;
-            border: 1px solid #1ea5c3;
-            border-radius: 5px;
-            background-color: transparent;
-            color: #1ea5c3;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-left: 10px;
-        }
-        input[type="submit"]:hover,
-        .back-button:hover {
-            background-color: #dbd9d9;
-            border-color: #fff;
-            color: #1ea5c3;
-        }
-    </style>
+        <link rel="stylesheet" href="style.css">
+ 
     </head>
     <body>
         <div class="container">

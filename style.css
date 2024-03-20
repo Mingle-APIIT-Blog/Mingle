@@ -467,3 +467,228 @@ nav.navbar {
         height: auto;
     }
 }
+
+/*display user specific blog posts in dashboard styling*/
+.blog-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    /* Adjust top padding for the whole container */
+}
+
+.blog-post {
+    display: flex;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    /* Ensure position relative for absolute positioning of action buttons */
+    padding-top: 20px;
+    /* Adjust top padding for each card */
+}
+
+.blog-thumb {
+    flex: 1;
+    padding: 10px;
+    margin-top: 20px;
+    /* Adjust top margin for the image */
+}
+
+.blog-thumb img {
+    width: 100%;
+    height: auto;
+}
+
+.blog-content {
+    flex: 2;
+    padding: 10px;
+}
+
+.blog-info {
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+
+.blog-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.blog-actions button {
+    margin-left: 5px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.blog-info h4 {
+    padding-bottom: 15px;
+    font-size: 20px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    font-weight: 900;
+    color: #20232e;
+}
+
+
+.fa-edit,
+.fa-trash-alt {
+    font-size: 18px;
+}
+
+
+.post-info li {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.post-info li:first-child:after {
+    content: '|';
+    color: #aaa;
+    margin-left: 8px;
+}
+
+
+.post-info li a {
+    font-size: 14px;
+    color: #aaa;
+    font-weight: 400;
+    transition: all .3s;
+}
+
+/*edit blog form styling*/
+.container {
+    max-width: 800px;
+    margin-top:65px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+label {
+    font-weight: bold;
+}
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+.update-blog-title{
+    padding-top: 5px;
+    padding-bottom: 20px;
+}
+#blogTitle{
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.update-button{
+    display: inline-block;
+    font-size: 16px;
+    padding: 8px 10px;
+    border: 1px solid #1ea5c3;
+    border-radius: 5px;
+    background-color: #1ea5c3;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button {
+    font-size: 16px;
+    display: inline-block;
+    padding: 8px 10px;
+    border: 1px solid #1ea5c3;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #1ea5c3;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+input[type="submit"]:hover,
+.back-button:hover {
+    background-color: #dbd9d9;
+    border-color: #fff;
+    color: #1ea5c3;
+}
+
+/*upload blog form*/
+.container {
+    max-width: 600px;
+    margin-top:65px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+}
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+input[type="file"] {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+textarea {
+    resize: vertical;
+}
+.submit-button{
+    display: inline-block;
+    font-size: 16px;
+    padding: 8px 10px;
+    border: 1px solid #1ea5c3;
+    border-radius: 5px;
+    background-color: #1ea5c3;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button {
+    font-size: 16px;
+    display: inline-block;
+    padding: 8px 10px;
+    border: 1px solid #1ea5c3;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #1ea5c3;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+input[type="submit"]:hover,
+.back-button:hover {
+    background-color: #dbd9d9;
+    border-color: #fff;
+    color: #1ea5c3;
+}
+.error-message {
+    color: #ff0000;
+    margin-top: 5px;
+}

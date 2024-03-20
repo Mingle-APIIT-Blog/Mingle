@@ -172,34 +172,35 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
               </div>
               <div class="col-lg-12">
-                <div class="sidebar-item recent-posts">
-                  <div class="sidebar-heading">
-                    <h2>Recent Posts</h2>
-                  </div>
-                  <div class="content">
-                    <ul>
-                      <?php
-                      // Query to retrieve recent posts from the database
-                      $stmt = $db->prepare("SELECT blogTitle, creationDate FROM blog ORDER BY creationDate DESC LIMIT 3");
-                      $stmt->execute();
-                      $recentPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    <div class="sidebar-item recent-posts">
+        <div class="sidebar-heading">
+            <h2>Recent Posts</h2>
+        </div>
+        <div class="content">
+            <ul>
+                <?php
+                // Query to retrieve recent posts from the database
+                $stmt = $db->prepare("SELECT id, blogTitle, creationDate FROM blog ORDER BY creationDate DESC LIMIT 3");
+                $stmt->execute();
+                $recentPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                      // Loop through the recent posts and display them
-                      foreach ($recentPosts as $post) {
-                      ?>
-                        <li>
-                          <a href="post-details.html">
+                // Loop through the recent posts and display them
+                foreach ($recentPosts as $post) {
+                ?>
+                    <li>
+                        <a href="post_details.php?postId=<?php echo $post['id']; ?>">
                             <h5><?php echo htmlspecialchars($post['blogTitle']); ?></h5>
                             <span><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></span>
-                          </a>
-                        </li>
-                      <?php
-                      }
-                      ?>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+                        </a>
+                    </li>
+                <?php
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
+</div>
+
 
               <div class="col-lg-12">
                 <div class="sidebar-item categories">
