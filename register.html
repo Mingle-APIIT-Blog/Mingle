@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-pg-logos">
+            <img src="assets/images/apiit-logo.png" alt="" width="auto" height="75px">
+            <img src="assets/images/BrandLogo.png" alt="" width="250px" height="100px">
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <h5 class="card-header">Register</h5>
+                    <div class="card-body">
+                        <form action="register.php" method="post" id="registerForm">
+                            <div class="form-group">
+                                <label for="user-type">Who are you?</label>
+                                <select class="form-control" id="user-type" name="user-type" required>
+                                    <option value="">Select</option>
+                                    <option value="student">Student</option>
+                                    <option value="lecturer">Lecturer</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="full-name">Full Name</label>
+                                <input type="text" class="form-control" id="full-name" name="full-name" pattern="[A-Za-z ]+" title="Please enter letters only" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirm-password" name="confirm-password" required />
+                                <p id="password-error" style="color: red; display: none;">Passwords do not match.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="return validatePassword()">Register</button>
+                            <button type="button" onclick="history.back()" class="btn back-primary">Back</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm-password").value;
+            if (password != confirmPassword) {
+                document.getElementById("password-error").style.display = "block";
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>
