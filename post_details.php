@@ -56,7 +56,7 @@ if (isset($_GET['postId'])) {
                                 <li class="nav-item">
                                     <a class="nav-link" href="aboutUs.html">About Us</a>
                                 </li>
-                                <li class="nav-item">
+                                <!--li class="nav-item">
                                     <a class="nav-link" href="blog.html">Services</a>
                                 </li>
                                 <li class="nav-item">
@@ -64,7 +64,7 @@ if (isset($_GET['postId'])) {
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Mentoring Sessions</a>
-                                </li>
+                                </li-->
                                 <button class="login-button">
                                     <a class="nav-link" href="login.html">Login</a>
                                 </button>
@@ -102,9 +102,9 @@ if (isset($_GET['postId'])) {
                             <?php endif; ?>
                         </div>
                         <div class="down-content">
-                            <a href="post-details.html">
+                         
                                 <h4><?php echo htmlspecialchars($post['blogTitle']); ?></h4>
-                            </a>
+                           
                             <ul class="post-info">
                                 <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a></li>
                                 <li><a href="#"><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>

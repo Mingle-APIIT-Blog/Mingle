@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once 'db.php';
+
+// Retrieve all blog posts from the database
+$stmt = $db->prepare("SELECT b.*, u.full_name AS author_name FROM blog b JOIN users u ON b.user_id = u.id ORDER BY b.id DESC");
+$stmt->execute();
+$blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!--Just UI no user authentication etc...-->
@@ -9,7 +19,7 @@
   <meta name="author" content="TemplateMo">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title>Mingle:: APIIT's Blog</title>
+  <title>APIIT Blog: Mingle</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,15 +31,6 @@
   <link rel="stylesheet" href="assets/css/owl.css">
 
 </head>
-<?php
-session_start();
-require_once 'db.php';
-
-// Retrieve all blog posts from the database
-$stmt = $db->prepare("SELECT b.*, u.full_name AS author_name FROM blog b JOIN users u ON b.user_id = u.id ORDER BY b.id DESC");
-$stmt->execute();
-$blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 
 <body>
 
@@ -51,7 +52,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li class="nav-item">
               <a class="nav-link" href="aboutUs.html">About Us</a>
             </li>
-            <li class="nav-item">
+            <!--li class="nav-item">
               <a class="nav-link" href="blog.html">Services</a>
             </li>
             <li class="nav-item">
@@ -59,7 +60,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contact.html">Mentoring Sessions</a>
-            </li>
+            </li-->
             <button class="login-button">
               <a class="nav-link" href="login.html">Login</a>
             </button>
@@ -76,7 +77,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="row">
           <div class="col-lg-12">
             <div class="text-content">
-              <h4>Mingle</h4>
+              <h4>APIIT Blog</h4>
               <h2>Inspire Love For Living</h2>
             </div>
           </div>

@@ -4,17 +4,16 @@ require_once 'db.php'; // Ensure this path correctly points to your database con
 
 // Check if the form has been submitted via POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['password'])) {
-    // Trim email and password to remove any accidental whitespace
+    // Trim email to remove any accidental whitespace
     $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-
-    // Prepare a statement to prevent SQL injection attacks
+    
+    // Fetch the user's record from the database
     $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Since hashing is not used (not recommended), directly compare the plaintext passwords
-    if ($user && $password == $user['password']) {
+    // Verify if user exists and if the hashed password matches
+    if ($user && password_verify($_POST['password'], $user['password'])) {
         // Authentication successful, set session variables
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_type'] = $user['user_type'];

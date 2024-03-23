@@ -16,9 +16,10 @@
             <a href="upload-blog-form.php" class="btn option-btn">Upload Blog</a>
             <!--a href="display_blog.php" class="btn option-btn">See My Blogs</a-->
         </div>
-        <?php
-        include "display_blog.php";
-        ?>
+
     </div>
 </body>
 </html>
+<?php
+        include "display_blog.php";
+        ?>

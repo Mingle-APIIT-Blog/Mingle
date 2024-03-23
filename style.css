@@ -10,7 +10,7 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+   background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -473,6 +473,7 @@ nav.navbar {
     display: flex;
     flex-direction: column;
     padding-top: 20px;
+    max-width: 80%;
     /* Adjust top padding for the whole container */
 }
 
@@ -691,4 +692,5 @@ input[type="submit"]:hover,
 .error-message {
     color: #ff0000;
     margin-top: 5px;
+    font-size: 15px;
 }

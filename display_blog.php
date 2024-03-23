@@ -28,15 +28,39 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Add Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<script>
+    <script>
         function confirmDelete() {
             return confirm("Are you sure you want to delete this blog post?");
         }
     </script>
+    <style>
+        .blog-container {
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            max-width: 80%;
+            align-items: center;
+            margin: auto;
+        }
+
+        .blog-post {
+            display: flex;
+            margin-bottom: 20px;
+            background-color: transparent;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            /* Ensure position relative for absolute positioning of action buttons */
+            padding-top: 20px;
+            /* Adjust top padding for each card */
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Blog Posts</h1>
+    <!--h1>Blog Posts</h1-->
     <div class="blog-container">
         <?php foreach ($blogPosts as $post) : ?>
             <div class="blog-post">
