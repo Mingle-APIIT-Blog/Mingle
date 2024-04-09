@@ -27,8 +27,8 @@ if (isset($_SESSION['form_data'])) {
             <label for="blogTitle">Blog Title:</label><br>
             <input type="text" id="blogTitle" name="blogTitle" value="<?php echo htmlspecialchars($blogTitle); ?>"><br>
             
-            <label for="blogImage">Blog Image:</label><br>
-            <input type="file" id="blogImage" name="blogImage"><br>
+            <label for="blogImage">Blog Image</label><br>
+            <input type="file" id="blogImage" name="blogImage" accept=".png, .jpg, .jpeg, .svg, .gif"><br>
             
             <label for="blogContent">Blog Content:</label><br>
             <textarea id="blogContent" name="blogContent" rows="6" cols="50"><?php echo htmlspecialchars($blogContent); ?></textarea><br>
@@ -47,6 +47,12 @@ if (isset($_SESSION['form_data'])) {
 
             if (title === '' || image === '' || content === '') {
                 document.getElementById('errorMessage').innerText = 'Please fill in all fields.';
+                return false; // Prevent form submission
+            }
+
+            var allowedExtensions = /(\.png|\.jpg|\.jpeg|\.svg|\.gif)$/i;
+            if (!allowedExtensions.exec(image)) {
+                document.getElementById('errorMessage').innerText = 'Please upload PNG, JPG, JPEG, SVG, or GIF images only.';
                 return false; // Prevent form submission
             }
 

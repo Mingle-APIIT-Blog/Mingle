@@ -18,17 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_PO
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_type'] = $user['user_type'];
 
-        // Redirect the user based on their type
-        switch ($user['user_type']) {
-            case 'Student':
-                header('Location: student_dashboard.php'); exit;
-            case 'Lecturer':
-                header('Location: lecturer_dashboard.php'); exit;
-            case 'Alumni':
-                header('Location: alumni_dashboard.php'); exit;
-            case 'Admin':
-                header('Location: admin_dashboard.php'); exit;
-        }
+        // Redirect the user to the index.php page
+        header('Location: index.php'); exit;
     } else {
         // Log the failed login attempt for debugging
         error_log("Login failed for email: $email"); // Check your server's error log
