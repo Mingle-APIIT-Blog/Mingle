@@ -557,6 +557,13 @@ nav.navbar {
 }
 
 
+/* .post-info li:not(:last-child)::after {
+    content: '|';
+    color: #aaa;
+    margin-left: 8px;
+} */
+
+
 .post-info li a {
     font-size: 14px;
     color: #aaa;

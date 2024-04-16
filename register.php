@@ -1,69 +1,167 @@
 <?php
 session_start();
-require_once 'db.php'; // Ensure this path correctly points to your database connection file
+require_once 'db.php'; 
 
-// Check if the form has been submitted via POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user-type']) && isset($_POST['full-name']) && isset($_POST['username'])  && isset($_POST['email']) && isset($_POST['confirm-password'])) {
-    // Trim form inputs to remove any accidental whitespace
-    $user_type = $_POST['user-type'];
-    $full_name = trim($_POST['full-name']);
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $confirm_password = trim($_POST['confirm-password']);
-
-    // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Redirect back to the register page with an error query parameter for invalid email format
-        header('Location: register.html?error=email'); 
-        exit;
+// To check if the form has been submitted via POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Validate and process form based on user type
+    switch ($_POST['user-type']) {
+        case 'Student':
+        case 'Lecturer':
+            validateAndProcessUser($_POST);
+            break;
+        case 'Alumni':
+            validateAndProcessAlumni($_POST);
+            break;
+        default:
+            $_SESSION['error'] = 'Invalid user type';
+            header('Location: register_view.php');
+            exit;
     }
-
-    // Validate email domain
-    if (strpos($email, 'apiit.lk') === false) {
-        // Redirect back to the register page with an error query parameter for invalid email domain
-        header('Location: register.html?error=email_domain'); 
-        exit;
-    }
-
-    // Check if password and confirm password match
-    if ($confirm_password != $_POST['password']) {
-        // Redirect back to the register page with an error query parameter for password mismatch
-        header('Location: register.html?error=password_mismatch'); 
-        exit;
-    }
-
-    // Check if username already exists
-    $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    $existing_user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($existing_user) {
-        // Redirect back to the register page with an error query parameter for existing username
-        header('Location: register.html?error=username_exists'); 
-        exit;
-    }
-
-    // Check if email already exists
-    $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $existing_email = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($existing_email) {
-        // Redirect back to the register page with an error query parameter for existing email
-        header('Location: register.html?error=email_exists'); 
-        exit;
-    }
-
-    // If all validations pass, insert the user data into the database
-    $stmt = $db->prepare("INSERT INTO users (username, password, user_type, full_name, email) VALUES (?, ?, ?, ?, ?)");
-    $hashed_password = password_hash($confirm_password, PASSWORD_DEFAULT); // Hash the password for security
-    $stmt->execute([$username, $hashed_password, $user_type, $full_name, $email]);
-
-    // Redirect to a success page or login page after registration
-    header('Location: login.html'); 
-    exit;
 } else {
-    // If not a POST request or if essential fields are missing, redirect to the registration page with an error query parameter
-    header('Location: register.html?error=missing_fields'); 
+    // If not a POST request, redirect to the registration page
+    header('Location: register_view.php');
     exit;
 }
 
+function validateAndProcessUser($formData) {
+    global $db;
+    // Validating the input fields for students and lecturers
+    $requiredFields = ['full-name', 'username', 'email', 'password', 'confirm-password', 'user-faculty'];
+    foreach ($requiredFields as $field) {
+        if (!isset($formData[$field]) || empty($formData[$field])) {
+            $_SESSION['error'] = 'All fields are required';
+            header('Location: register_view.php');
+            exit;
+        }
+    }
+
+    // Extract form data
+    $user_type = $formData['user-type'];
+    $full_name = trim($formData['full-name']);
+    $username = trim($formData['username']);
+    $email = trim($formData['email']);
+    $password = trim($formData['password']);
+    $confirm_password = trim($formData['confirm-password']);
+    $user_faculty = $formData['user-faculty']; 
+
+    // Validate email format based on user type - for students and lecturers it's apiit.lk
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !strpos($email, 'apiit.lk')) {
+        $_SESSION['error'] = 'Invalid email format';
+        header('Location: register_view.php');
+        exit;
+    }
+
+    // To check if password and confirm password match
+    if ($password != $confirm_password) {
+        $_SESSION['error'] = 'Password and confirm password do not match';
+        header('Location: register_view.php');
+        exit;
+    }
+
+    // To check if username already exists
+    $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+        $_SESSION['error'] = 'Username already exists';
+        header('Location: register_view.php');
+        exit;
+    }
+
+    //  To check if email already exists
+    $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+        $_SESSION['error'] = 'Email already exists';
+        header('Location: register_view.php');
+        exit;
+    }
+
+    // Insert the user data into the database
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password for security
+    $stmt = $db->prepare("INSERT INTO users (username, password, user_type, full_name, email, user_faculty) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$username, $hashed_password, $user_type, $full_name, $email, $user_faculty]);
+
+    // Redirect after successful registration
+    header('Location: login.html');
+    exit;
+}
+
+function validateAndProcessAlumni($formData) {
+    global $db;
+    // Validating the input fields for alumni
+    $requiredFields = ['full-name', 'username', 'email', 'password', 'confirm-password', 'alumni-association-id', 'user-faculty'];
+    foreach ($requiredFields as $field) {
+        if (!isset($formData[$field]) || empty($formData[$field])) {
+            $_SESSION['error'] = 'All fields are required';
+            header('Location: register_view.php');
+            exit;
+        }
+    }
+
+    // Extract form data
+    $user_type = $formData['user-type'];
+    $full_name = trim($formData['full-name']);
+    $username = trim($formData['username']);
+    $email = trim($formData['email']);
+    $password = trim($formData['password']);
+    $confirm_password = trim($formData['confirm-password']);
+    $alumni_association_id = trim($formData['alumni-association-id']);
+    $user_faculty = $formData['user-faculty']; 
+
+    // Validate email format for alumni
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['error'] = 'Invalid email format';
+        header('Location: register_view.php');
+        exit;
+    }
+
+    // To check if password and confirm password match
+    if ($password != $confirm_password) {
+        $_SESSION['error'] = 'Password and confirm password do not match';
+        header('Location: register_view.php');
+        exit;
+    }
+
+    // To check if username already exists
+    $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+        $_SESSION['error'] = 'Username already exists';
+        header('Location: register_view.php');
+        exit;
+    }
+
+    // To check if email already exists
+    $stmt = $db->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+        $_SESSION['error'] = 'Email already exists';
+        header('Location: register_view.php');
+        exit;
+    }
+
+    // To check if alumni association ID exists in the alumni table
+    $stmt = $db->prepare("SELECT * FROM alumni WHERE alumni_id = ?");
+    $stmt->execute([$alumni_association_id]);
+    $alumni = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$alumni) {
+        $_SESSION['error'] = 'Invalid alumni association ID';
+        header('Location: register_view.php');
+        exit;
+    }
+
+
+
+    // Insert the user data into the database
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password for security
+    $stmt = $db->prepare("INSERT INTO users (username, password, user_type, full_name, email, user_faculty, alumni_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$username, $hashed_password, $user_type, $full_name, $email, $user_faculty, $alumni['id']]);
+
+
+
+    // Redirect after successful registration
+    header('Location: login.html');
+    exit;
+}
 ?>

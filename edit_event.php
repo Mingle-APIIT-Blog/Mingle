@@ -2,27 +2,27 @@
 session_start();
 require_once('db.php');
 
-// Check if event ID is provided in the URL
+// To check if event ID is provided in the URL
 if (isset($_GET['id'])) {
     $eventId = $_GET['id'];
     
-    // Fetch event details from the database
+    // To fetch event details from the database
     $stmt = $db->prepare("SELECT * FROM events WHERE id = ?");
     $stmt->execute([$eventId]);
     $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Check if the event exists
+    // To check if the event exists
     if (!$event) {
         echo "Event not found.";
         exit;
     }
 
-    // Handle form submission
+    // Handling form submission
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Retrieve form data
+        // Retrieving form data
         $eventName = $_POST['eventName'];
-        $eventDate = $_POST['eventDate']; // Separate date input
-        $eventTime = $_POST['eventTime']; // Separate time input
+        $eventDate = $_POST['eventDate']; 
+        $eventTime = $_POST['eventTime']; 
         $eventVenue = $_POST['eventVenue'];
         $organizingParty = $_POST['organizingParty'];
 
@@ -53,7 +53,7 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
     <link rel="stylesheet"
@@ -77,76 +77,75 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
     <link rel="stylesheet" href="assets/css/owl.css">
-    
+
     <style>
-   
+        h2 {
+            color: #333;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-    h2 {
-        color: #333;
-        text-align: center;
-        font-size: 22px;
-        font-weight: bold;
-    }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 500px;
+            margin: 50px auto;
+        }
 
-    form {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 80%;
-        max-width: 500px;
-        margin: 50px auto;
-    }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
 
-    label {
-        display: block;
-        margin-bottom: 10px;
-        /* Increased margin between labels */
-        color: #555;
-    }
+        input[type="text"],
+        input[type="date"],
+        input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
 
-    input[type="text"],
-    input[type="date"],
-    input[type="time"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        /* Increased margin between input fields */
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 16px;
-    }
+        button[type="submit"] {
+            background-color: #0d7b99;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
 
-    button[type="submit"] {
-        background-color: #0d7b99;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 100%;
-        font-size: 16px;
-    }
+        button[type="submit"]:hover {
+            color: #0d7b99;
+            background-color: #fff;
+            border: 1px solid #0d7b99;
+            border-color: #0d7b99;
 
-    button[type="submit"]:hover {
-        color: #0d7b99;
-        background-color: #fff;
-        border: 1px solid #0d7b99;
-        border-color: #0d7b99;
+        }
 
-    }
-    .header-1 {
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+        .header-1 {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
 <body>
     <?php include 'header.php'; ?>
+
     <div class="heading-page header-text">
         <!-- to get the space between the header and event management -->
     </div>
+
     <form id="eventForm" action="" method="post">
         <h2>Edit Event</h2>
         <label for="eventName">Event Name:</label>
@@ -167,4 +166,5 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 
         <button type="submit">Update Event</button>
     </form>
+    
     <?php include 'footer.php'; ?>

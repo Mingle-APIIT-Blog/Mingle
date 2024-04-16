@@ -2,19 +2,19 @@
 session_start();
 require_once 'db.php';
 
-// Retrieve all blog posts from the database
+// To retrieve all blog posts from the database
 $stmt = $db->prepare("SELECT b.*, u.full_name AS author_name FROM blog b JOIN users u ON b.user_id = u.id ORDER BY b.id DESC");
 $stmt->execute();
 $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Check if the user is logged in
+// To check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
-<!--Just UI no user authentication etc...-->
+
 
 <head>
     <meta charset="utf-8">
@@ -42,9 +42,9 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
     <style>
     #calendar {
         margin: 50px auto;
-        /* Center the calendar with top and bottom margin */
+        /* To center the calendar with top and bottom margin */
         max-width: 800px;
-        /* Set max width to ensure it's fully visible */
+        /* Setting max width to ensure it's fully visible */
     }
 
     .modal {
@@ -141,8 +141,9 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            events: 'events.php', // Path to your PHP script
+            events: 'events.php', // Path to the PHP script
             eventClick: function(info) {
+                // Constructing the HTML to display event details
                 var eventDetails = "<strong>Event:</strong> " + info.event.title + "<br>" +
                     "<strong>Date:</strong> " + info.event.start.toLocaleDateString() + "<br>" +
                     "<strong>Time:</strong> " + info.event.start.toLocaleTimeString() + "<br>" +
@@ -183,8 +184,8 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
     cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
     function clearField(t) { //declaring the array outside of the
         if (!cleared[t.id]) { // function makes it static and global
-            cleared[t.id] = 1; // you could use true and false, but that's more typing
-            t.value = ''; // with more chance of typos
+            cleared[t.id] = 1; 
+            t.value = ''; 
             t.style.color = '#fff';
         }
     }

@@ -167,6 +167,12 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         background-color: #fff !important;
         border-color: transparent !important;
     }
+    
+    .post-info li:not(:last-child)::after {
+        content: '|';
+        color: #aaa;
+        margin-left: 8px;
+    }
 
   </style>
 </head>
@@ -185,7 +191,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Dashboard</a></li>
+                    <li class="active"><a href="index.php">Home</a></li>
                     <li>
                         <hr>
                     </li>
@@ -208,6 +214,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#section1">Dashboard</a></li>
                     <li><a href="upload-blog-form.php">Upload Blogs</a></li>
+                    <li><a href="index.php">Back to Home</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul><br>
             </div>
@@ -232,6 +239,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                                     <h4><?php echo htmlspecialchars($post['blogTitle']); ?></h4>
                                                     <ul class="post-info">
                                                         <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a></li>
+                                                        <li><a href="#"><?php echo htmlspecialchars($post['category']); ?></a></li>
                                                         <li><a href="#"><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>
                                                     </ul>
                                                 </div>

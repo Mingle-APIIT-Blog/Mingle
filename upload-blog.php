@@ -2,8 +2,8 @@
 session_start();
 require_once 'db.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset($_FILES['blogImage']) && isset($_POST['blogContent'])) {
-    // Check if user is logged in
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle'], $_FILES['blogImage'], $_POST['blogContent'], $_POST['category'])) {
+    // To check if user is logged in
     if (isset($_SESSION['user_id'])) {
         $blogTitle = htmlspecialchars($_POST['blogTitle']);
         $blogContent = htmlspecialchars($_POST['blogContent']);
@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset(
         // Get user ID from session
         $userId = $_SESSION['user_id'];
         $userType = $_SESSION['user_type']; //to redirect user after uploading to specific dashboard depending on user type
-        $fullName = isset($_SESSION['full_name']) ? $_SESSION['full_name'] : '';
 
         // Handle file upload
         $imageTmpName = $_FILES['blogImage']['tmp_name'];
@@ -21,8 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset(
         // Get current date and time
         $currentDate = date('Y-m-d H:i:s');
 
+        // Determine category based on selected value
+        $category = htmlspecialchars($_POST['category']);
+
         // Prepare SQL statement to insert data into the database
-        $stmt = $db->prepare("INSERT INTO blog (user_id, blogTitle, blogImage, blogContent, creationDate) VALUES (:user_id, :blogTitle, :blogImage, :blogContent, :creationDate)");
+        $stmt = $db->prepare("INSERT INTO blog (user_id, blogTitle, blogImage, blogContent, creationDate, category) VALUES (:user_id, :blogTitle, :blogImage, :blogContent, :creationDate, :category)");
 
         // Bind parameters
         $stmt->bindParam(':user_id', $userId);
@@ -30,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset(
         $stmt->bindParam(':blogImage', $imageBase64); // Store image data as base64 string
         $stmt->bindParam(':blogContent', $blogContent);
         $stmt->bindParam(':creationDate', $currentDate);
+        $stmt->bindParam(':category', $category); // Bind category parameter
 
         // Execute the statement
         try {
@@ -66,6 +69,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle']) && isset(
     exit;
 }
 ?>
-
-
-

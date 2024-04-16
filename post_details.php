@@ -1,5 +1,6 @@
 <?php
 session_start();
+$isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 require_once 'db.php';
 
 // Check if postId is provided in the URL
@@ -39,40 +40,7 @@ if (isset($_GET['postId'])) {
         <body>
 
             <!-- Header -->
-            <header class="">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container">
-                        <a class="navbar-brand" href="index.php"><img src="assets/images/BrandLogo.png" width="180px" height="60px"></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarResponsive">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="index.php">Home
-                                        <span class="sr-only">(current)</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="aboutUs.html">About Us</a>
-                                </li>
-                                <!--li class="nav-item">
-                                    <a class="nav-link" href="blog.html">Services</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="post-details.html">Career Guidance</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Mentoring Sessions</a>
-                                </li-->
-                                <button class="login-button">
-                                    <a class="nav-link" href="login.html">Login</a>
-                                </button>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </header>
+            <?php include 'header.php'; ?>
 
             <!-- Banner Starts Here -->
             <div class="heading-page header-text">
@@ -103,42 +71,20 @@ if (isset($_GET['postId'])) {
                         </div>
                         <div class="down-content">
                          
-                                <h4><?php echo htmlspecialchars($post['blogTitle']); ?></h4>
+                            <span><?php echo htmlspecialchars($post['blogTitle']); ?></span>
                            
-                            <ul class="post-info">
-                                <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a></li>
-                                <li><a href="#"><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>
-                            </ul>
+                                <ul class="post-info">
+                                    <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a></li>
+                                    <li><a href="#"><?php echo htmlspecialchars($post['category']); ?></a></li> 
+                                    <li><a href="#"><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>
+                                </ul>
+                                
                             <p><?php echo nl2br(htmlspecialchars($post['blogContent'])); ?></p>
                         </div>
                     </div>
 
                 </div>
             </section>
-
-
-            <!-- Page Content
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="blog-post">
-                            <div class="blog-thumb">
-                                ?php if (!empty($post['blogImage'])): ?>
-                                    <img src="data:image/jpeg;base64,?php echo $post['blogImage']; ?>" alt="Blog Image">
-                                ?php endif; ?>
-                            </div>
-                            <div class="down-content">
-                                <h4>?php echo htmlspecialchars($post['blogTitle']); ?></h4>
-                                <ul class="post-info">
-                                    <li><a href="#">?php echo htmlspecialchars($post['author_name']); ?></a></li>
-                                    <li><a href="#">?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>
-                                </ul>
-                                <p>?php echo nl2br(htmlspecialchars($post['blogContent'])); ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
             <!-- Footer -->
             <footer>
@@ -179,9 +125,7 @@ if (isset($_GET['postId'])) {
                             <li><a href="https://apiit.lk/courses/institute-of-chartered-accountants-in-england-and-wales-icaew/">Professional</a></li>
                         </ul>
                         <br>
-                        <!--div class="donate-but">
-             <a href="purchase.html#donation-types-main" class="donate-button" ">DONATE</a>
-     </div-->
+                        
                     </div>
 
                     <div class="footer-col">

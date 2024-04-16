@@ -6,14 +6,14 @@ require_once('db.php');
 $eventsPerPage = 5; // Number of events to display per page
 $page = isset($_GET['page']) ? $_GET['page'] : 1; // Current page, default is 1
 
-// Calculate the offset for SQL query
+// To calculate the offset for SQL query
 $offset = ($page - 1) * $eventsPerPage;
 
 // Get filter parameters
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
 $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
 
-// Build the WHERE clause for date filtering
+// To build the WHERE clause for date filtering
 $whereClause = '';
 if ($startDate && $endDate) {
     $whereClause = "WHERE event_date BETWEEN '$startDate' AND '$endDate'";
@@ -28,15 +28,15 @@ $stmt = $db->prepare("SELECT * FROM events $whereClause LIMIT :offset, :limit");
 $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 $stmt->bindParam(':limit', $eventsPerPage, PDO::PARAM_INT);
 $stmt->execute();
-$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$events = $stmt->fetchAll(PDO::FETCH_ASSOC); //fetch all events into an associative array named $events
 
 // Count total number of events with filtering
 $totalEvents = $db->query("SELECT COUNT(*) FROM events $whereClause")->fetchColumn();
 
-// Calculate total number of pages
+// To calculate total number of pages
 $totalPages = ceil($totalEvents / $eventsPerPage);
 
-// Check if the user is logged in
+// To check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 ?>
 
@@ -66,150 +66,152 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
     <link rel="stylesheet" href="assets/css/owl.css">
 
     <style>
-    .header-1 {
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
+        .header-1 {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    .event-container {
-        max-width: 1200px;
-        margin: 20px auto;
-        margin-bottom: 5%;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        .event-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            margin-bottom: 5%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    h2 {
-        text-align: center;
-    }
+        h2 {
+            text-align: center;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-    th,
-    td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
 
-    th {
-        background-color: #f2f2f2;
-    }
+        th {
+            background-color: #f2f2f2;
+        }
 
-    tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
-    .action-btns a {
-        display: inline-block;
-        margin-right: 5px;
-        padding: 5px 10px;
-        text-decoration: none;
-        color: #fff;
-        border-radius: 3px;
-        transition: background-color 0.3s ease;
-    }
+        .action-btns a {
+            display: inline-block;
+            margin-right: 5px;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 3px;
+            transition: background-color 0.3s ease;
+        }
 
-    .action-btns a.edit-btn {
-        background-color: #007bff;
-    }
+        .action-btns a.edit-btn {
+            background-color: #007bff;
+        }
 
-    .action-btns a.delete-btn {
-        background-color: #dc3545;
-    }
+        .action-btns a.delete-btn {
+            background-color: #dc3545;
+        }
 
-    .action-btns a:hover {
-        background-color: #0d7b99;
-    }
+        .action-btns a:hover {
+            background-color: #0d7b99;
+        }
 
-    .add-event-btn {
-        display: block;
-        margin: 20px auto;
-        padding: 10px 20px;
-        background-color: #0d7b99;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        text-decoration: none;
-        text-align: center;
-        width: 150px;
-    }
+        .add-event-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #0d7b99;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            width: 150px;
+        }
 
-    .add-event-btn:hover {
-        color: #0d7b99;
-        background-color: #fff;
-        border: 1px solid #0d7b99;
-        border-color: #0d7b99;
-    }
+        .add-event-btn:hover {
+            color: #0d7b99;
+            background-color: #fff;
+            border: 1px solid #0d7b99;
+            border-color: #0d7b99;
+        }
 
-    /* pagination css */
-    .pagination {
-        margin-top: 20px;
-        text-align: center;
-    }
+        /* pagination css */
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
 
-    .pagination a {
-        color: #007bff;
-        padding: 8px 16px;
-        text-decoration: none;
-        transition: background-color 0.3s;
-        border: 1px solid #007bff;
-        margin: 0 5px;
-        border-radius: 5px;
-    }
+        .pagination a {
+            color: #007bff;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: 1px solid #007bff;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
 
-    .pagination a.active {
-        background-color: #007bff;
-        color: #fff;
-    }
+        .pagination a.active {
+            background-color: #007bff;
+            color: #fff;
+        }
 
-    .pagination a:hover:not(.active) {
-        background-color: #f2f2f2;
-    }
+        .pagination a:hover:not(.active) {
+            background-color: #f2f2f2;
+        }
 
-    /* Filter form styling */
-    form {
-        margin-bottom: 20px;
-        text-align: center;
-    }
+        /* Filter form styling */
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-    label {
-        margin-right: 10px;
-    }
+        label {
+            margin-right: 10px;
+        }
 
-    input[type="date"] {
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
+        input[type="date"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-    button[type="submit"] {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin-top: 10px;
-        color: #0d7b99;
-        background-color: #fff;
-        border: 1px solid #0d7b99;
-        border-color: #0d7b99;
-    }
+        button[type="submit"] {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            color: #0d7b99;
+            background-color: #fff;
+            border: 1px solid #0d7b99;
+            border-color: #0d7b99;
+        }
     </style>
 </head>
 
 <body>
     <?php include 'header.php'; ?>
+
     <div class="heading-page header-text">
         <!-- to get the space between the header and event management -->
     </div>
+
     <form action="" method="get">
         <label for="startDate">Start Date:</label>
         <input type="date" id="startDate" name="startDate">
@@ -217,6 +219,7 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
         <input type="date" id="endDate" name="endDate">
         <button type="submit">Filter</button>
     </form>
+
     <div class="event-container">
         <h2>Event Management</h2>
         <a href="add_event.php" class="add-event-btn">Add Event</a>
@@ -240,7 +243,9 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
                     <td><?php echo $event['venue']; ?></td>
                     <td><?php echo $event['organizing_party']; ?></td>
                     <td class="action-btns">
+                        <!-- Edit button with link to edit_event.php -->
                         <a href="edit_event.php?id=<?php echo $event['id']; ?>" class="edit-btn">Edit</a>
+                         <!-- Delete button with link to delete_event.php and confirmation dialog -->
                         <a href="delete_event.php?id=<?php echo $event['id']; ?>" class="delete-btn"
                             onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
                     </td>
@@ -252,21 +257,27 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
         <!-- Pagination links -->
         <?php if ($totalPages > 1): ?>
         <div class="pagination">
+            <!-- Previous page link -->
             <?php if ($page > 1): ?>
             <a href="?page=<?php echo $page - 1; ?>">Previous</a>
             <?php endif; ?>
 
+            <!-- Page number links -->
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
             <a href="?page=<?php echo $i; ?>" <?php if ($page == $i) echo 'class="active"'; ?>><?php echo $i; ?></a>
             <?php endfor; ?>
 
+            <!-- Next page link -->
             <?php if ($page < $totalPages): ?>
             <a href="?page=<?php echo $page + 1; ?>">Next</a>
             <?php endif; ?>
         </div>
         <?php endif; ?>
     </div>
+
+    <!-- footer -->
     <?php include 'footer.php'; ?>
+
 </body>
 
 </html>
