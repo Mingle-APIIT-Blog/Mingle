@@ -1,5 +1,9 @@
 <?php
-require_once('db.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ob_start();
+session_start();
+require_once 'db.php';
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

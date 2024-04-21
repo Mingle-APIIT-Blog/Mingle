@@ -15,8 +15,8 @@
                     <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'aboutUs.php' ? 'active' : ''; ?>">
                         <a class="nav-link" href="aboutUs.php">About Us</a>
                     </li>
-                    <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'alumni.php' ? 'active' : ''; ?>">
-                        <a class="nav-link" href="alumni.php">Alumni</a>
+                    <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'alumni_view.php' ? 'active' : ''; ?>">
+                        <a class="nav-link" href="alumni_view.php">Alumni</a>
                     </li>
                     <li class="nav-item <?php echo basename($_SERVER['PHP_SELF']) == 'calendar.php' ? 'active' : ''; ?>">
                         <a class="nav-link" href="calendar.php">Events</a>

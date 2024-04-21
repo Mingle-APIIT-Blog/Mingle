@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ob_start();
 session_start();
 require_once 'db.php';
 
@@ -46,7 +49,8 @@ if (isset($_SESSION['form_data'])) {
 
             <!-- Blog category selection -->
             <label for="category">Category:</label><br>
-            <select id="category" name="category">
+            <select id="category" name="category" required>
+            <option value="" selected disabled>Select a category</option> <!-- Placeholder option -->
                 <?php
                 // Retrieving user's faculty information from the database
                 if (isset($_SESSION['user_id'])) {

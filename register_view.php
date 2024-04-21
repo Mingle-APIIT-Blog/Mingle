@@ -1,3 +1,11 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ob_start();
+session_start();
+require_once 'db.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,7 +63,6 @@
                         <div class="form-heading"></div>
 
                         <?php
-                        session_start();
                         // Display error message if exists
                         if (isset($_SESSION['error'])) {
                             echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error'] . '</div>';

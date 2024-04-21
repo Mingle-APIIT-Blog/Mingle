@@ -1,5 +1,10 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ob_start();
 session_start();
+require_once 'db.php';
+
 $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 require_once 'db.php';
 

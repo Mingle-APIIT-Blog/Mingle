@@ -1,6 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ob_start();
 session_start();
-require_once('db.php');
 
 // Check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
@@ -30,6 +32,9 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Additional CSS Files -->

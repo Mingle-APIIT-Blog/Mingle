@@ -1,5 +1,9 @@
 <?php
-require_once('db.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ob_start();
+session_start();
+require_once 'db.php';
 
 // Check if event ID is provided in the URL
 if (isset($_GET['id'])) {

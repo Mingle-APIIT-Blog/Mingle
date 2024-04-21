@@ -1,6 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ob_start();
 session_start();
-require_once 'db.php'; 
+require_once 'db.php';
 
 // To check if the form has been submitted via POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -145,11 +148,26 @@ function validateAndProcessAlumni($formData) {
     $stmt = $db->prepare("SELECT * FROM alumni WHERE alumni_id = ?");
     $stmt->execute([$alumni_association_id]);
     $alumni = $stmt->fetch(PDO::FETCH_ASSOC);
+
     if (!$alumni) {
         $_SESSION['error'] = 'Invalid alumni association ID';
         header('Location: register_view.php');
         exit;
     }
+
+    // Get the corresponding alumni ID (primary key) from the alumni table
+    $alumni_id = $alumni['id'];
+
+    // To check if alumni association ID already exists in users table
+    $stmt = $db->prepare("SELECT * FROM users WHERE alumni_id = ?");
+    $stmt->execute([$alumni_id]);
+    $userWithAlumniID = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($userWithAlumniID) {
+        $_SESSION['error'] = 'Alumni association ID already registered to another user';
+        header('Location: register_view.php');
+        exit;
+    }
+
 
 
 

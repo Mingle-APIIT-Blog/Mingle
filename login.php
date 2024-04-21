@@ -1,6 +1,9 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ob_start();
 session_start();
-require_once 'db.php'; 
+require_once 'db.php';
 
 // Check if the form has been submitted via POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['password'])) {
