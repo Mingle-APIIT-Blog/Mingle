@@ -1,4 +1,4 @@
-# Agile-based Blog Platform
+# Mingle - APIIT Blog
 
 ## Table of Contents
 1. [Introduction](#introduction)
