@@ -42,9 +42,6 @@ Visit the team's organization -> Mingle: APIIT Blog
 - Delete Blog
 
 ## Sprint 2 Key Features
-### Sprint Goal
-The primary objective of Sprint 2 is to refine the web application based on feedback received during Sprint 1. This includes implementing updated functionalities such as appointment management, event calendar viewing, and content recommendations for Students, Lecturers, and Alumni.
-
 ### Key Features
 1. Appointment Management
 2. Event Calendar and Management
