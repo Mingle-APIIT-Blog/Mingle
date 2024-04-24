@@ -41,7 +41,7 @@ Visit the team's organization -> Mingle: APIIT Blog
 - Edit Blog
 - Delete Blog
 
-## Sprint 1 - Agile Team
+## Sprint 2 - Agile Team
 
 - **Scrum Master**  - Hajara Mumtaz
 - **Developer**  - [Chanjana Wijesekara](https://github.com/Chanjana)
