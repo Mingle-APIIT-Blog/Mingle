@@ -24,12 +24,12 @@ Visit the team's organization -> Mingle: APIIT Blog
 ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) 
 ![MySQL](https://img.shields.io/badge/mysql-%2300000f.svg?style=for-the-badge&logo=mysql&logoColor=white) 
 
-## Agile Team
+## Sprint 1 - Agile Team
 
-- **Maleesa Hettiarachchi**  - [Maleesa Hettiarachchi](https://github.com/Maleesanat01)
-- **Chanjana Wijesekera**  - [Chanjana Wijesekara](https://github.com/Chanjana)
-- **Amanaah Hisham**  - [Amanaah Hisham](https://github.com/amaanah-hisham)
-- **Hajara Mumtaz**   
+- **Scrum Master**  - [Chanjana Wijesekara](https://github.com/Chanjana)
+- **Developer**  - [Maleesa Hettiarachchi](https://github.com/Maleesanat01)
+- **QA**  - [Amanaah Hisham](https://github.com/amaanah-hisham)
+- **BA**  - Hajara Mumtaz
 
 ## Sprint 1 Key Features
 ### User Authentication & Authorization
@@ -40,6 +40,13 @@ Visit the team's organization -> Mingle: APIIT Blog
 - Upload Blog
 - Edit Blog
 - Delete Blog
+
+## Sprint 1 - Agile Team
+
+- **Scrum Master**  - Hajara Mumtaz
+- **Developer**  - [Chanjana Wijesekara](https://github.com/Chanjana)
+- **QA**  - [Maleesa Hettiarachchi](https://github.com/Maleesanat01)
+- **BA** - [Amanaah Hisham](https://github.com/amaanah-hisham)
 
 ## Sprint 2 Key Features
 
