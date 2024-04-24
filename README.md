@@ -42,7 +42,7 @@ Visit the team's organization -> Mingle: APIIT Blog
 - Delete Blog
 
 ## Sprint 2 Key Features
-### Key Features
+
 1. Appointment Management
 2. Event Calendar and Management
 3. Content Recommendation
