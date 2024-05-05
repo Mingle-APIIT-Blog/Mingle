@@ -29,7 +29,7 @@ Visit the team's organization -> Mingle: APIIT Blog
 - **Scrum Master**  - [Chanjana Wijesekara](https://github.com/Chanjana)
 - **Developer**  - [Maleesa Hettiarachchi](https://github.com/Maleesanat01)
 - **QA**  - [Amanaah Hisham](https://github.com/amaanah-hisham)
-- **BA**  - Hajara Mumtaz
+- **BA**  - [Hajara Mumtaz](https://github.com/haj05m)  
 
 ## Sprint 1 Key Features
 ### User Authentication & Authorization
@@ -43,7 +43,7 @@ Visit the team's organization -> Mingle: APIIT Blog
 
 ## Sprint 2 - Agile Team
 
-- **Scrum Master**  - Hajara Mumtaz
+- **Scrum Master**  - [Hajara Mumtaz](https://github.com/haj05m)  
 - **Developer**  - [Chanjana Wijesekara](https://github.com/Chanjana)
 - **QA**  - [Maleesa Hettiarachchi](https://github.com/Maleesanat01)
 - **BA** - [Amanaah Hisham](https://github.com/amaanah-hisham)
