@@ -1,9 +1,9 @@
 <?php
 // db.php: Database connection details
 $host = 'localhost';
-$dbName = 'apiit_group_1';
+$dbName = 'uni_db';
 $username = 'root';
-$password = '@piit_gr0up_1xx';
+$password = '';
 
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbName;charset=utf8mb4", $username, $password);
