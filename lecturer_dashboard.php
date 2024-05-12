@@ -199,6 +199,10 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <li>
                         <hr>
                     </li>
+                    <li><a href="lecturer_appointment_booking.php">Manage Student Appointments</a></li>
+                    <li>
+                        <hr>
+                    </li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul>
             </div>
@@ -214,6 +218,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#section1">Dashboard</a></li>
                     <li><a href="upload-blog-form.php">Upload Blogs</a></li>
+                    <li><a href="lecturer_appointment_booking.php">Manage Student Appointments</a></li>
                     <li><a href="index.php">Back to Home</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul><br>

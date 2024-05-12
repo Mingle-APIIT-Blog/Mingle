@@ -166,9 +166,10 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
         <label for="eventVenue">Venue:</label>
         <input type="text" id="eventVenue" name="eventVenue" value="<?php echo $event['venue']; ?>" required>
 
-        <label for="organizingParty">Organizing Party:</label>
-        <input type="text" id="organizingParty" name="organizingParty" value="<?php echo $event['organizing_party']; ?>"
-            required>
+        <label for="organizingParty">Organizing Club:</label>
+        <input type="text" id="organizingParty" name="organizingParty" value="<?php echo $event['organizing_party']; ?>" readonly required>
+
+
 
         <button type="submit">Update Event</button>
     </form>

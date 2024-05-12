@@ -51,6 +51,8 @@ function getDashboardLink($userType) {
             return 'alumni_dashboard.php';
         case 'Admin':
             return 'admin_dashboard.php';
+        case 'Patron':
+            return 'club_patron_dashboard.php';
         default:
             return ''; // Return an empty string for unknown user types
     }

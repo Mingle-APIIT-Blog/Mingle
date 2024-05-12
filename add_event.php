@@ -6,7 +6,35 @@ session_start();
 
 // Check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
+
+// Check if the user is logged in and fetch their full name from the database
+if ($isLoggedIn) {
+    // Establish a database connection 
+    require_once('db.php');
+
+    // Retrieve the user's full name from the database
+    $userId = $_SESSION['user_id'];
+    $stmt = $db->prepare("SELECT full_name FROM users WHERE id = :user_id");
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Check if the user exists in the database
+    if ($user) {
+        // Assign the user's full name to a session variable for later use
+        $_SESSION['full_name'] = $user['full_name'];
+    } else {
+        // If the user does not exist, redirect them to the login page
+        header('Location: login.php');
+        exit;
+    }
+} else {
+    // If the user is not logged in, redirect them to the login page
+    header('Location: login.php');
+    exit;
+}
 ?>
+
 
 
 
@@ -121,8 +149,8 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
         <label for="eventVenue">Venue:</label>
         <input type="text" id="eventVenue" name="eventVenue" required><br><br>
 
-        <label for="organizingParty">Organizing Party:</label>
-        <input type="text" id="organizingParty" name="organizingParty" required><br><br>
+        <label for="organizingParty">Organizing Club:</label>
+<input type="text" id="organizingParty" name="organizingParty" value="<?php echo isset($_SESSION['full_name']) ? htmlspecialchars($_SESSION['full_name']) : ''; ?>" readonly><br><br>
 
         <button type="submit">Save Event</button>
     </form>

@@ -2,10 +2,17 @@
 session_start();
 require_once('db.php');
 
-// Check if user is logged in
+// Check if user is logged in and has the correct user type
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page if not logged in
     header('Location: login.php');
+    exit;
+}
+
+// Additionally, check for the user type to be 'Patron'
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'Patron') {
+    // Redirect to the main page or a not authorized notification page
+    header('Location: index.php');  // Adjust the redirection target as necessary
     exit;
 }
 
@@ -16,42 +23,68 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1; // Current page, default is 1
 // To calculate the offset for SQL query
 $offset = ($page - 1) * $eventsPerPage;
 
+// Get the logged-in user's full name
+$userID = $_SESSION['user_id'];
+$stmt = $db->prepare("SELECT full_name FROM users WHERE id = :id");
+$stmt->bindParam(':id', $userID, PDO::PARAM_INT);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$fullName = $user['full_name'];
+
 // Get filter parameters
 $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
 $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
 
 // To build the WHERE clause for date filtering
-$whereClause = '';
+$whereClause = "WHERE organizing_party = :fullName";
 if ($startDate && $endDate) {
-    $whereClause = "WHERE event_date BETWEEN '$startDate' AND '$endDate'";
+    $whereClause .= " AND event_date BETWEEN :startDate AND :endDate";
 } elseif ($startDate) {
-    $whereClause = "WHERE event_date >= '$startDate'";
+    $whereClause .= " AND event_date >= :startDate";
 } elseif ($endDate) {
-    $whereClause = "WHERE event_date <= '$endDate'";
+    $whereClause .= " AND event_date <= :endDate";
 }
 
 // Retrieve events for the current page with filtering
 $stmt = $db->prepare("SELECT * FROM events $whereClause LIMIT :offset, :limit");
+$stmt->bindParam(':fullName', $fullName, PDO::PARAM_STR);
+if ($startDate) {
+    $stmt->bindParam(':startDate', $startDate, PDO::PARAM_STR);
+}
+if ($endDate) {
+    $stmt->bindParam(':endDate', $endDate, PDO::PARAM_STR);
+}
 $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 $stmt->bindParam(':limit', $eventsPerPage, PDO::PARAM_INT);
 $stmt->execute();
-$events = $stmt->fetchAll(PDO::FETCH_ASSOC); //fetch all events into an associative array named $events
+$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Count total number of events with filtering
-$totalEvents = $db->query("SELECT COUNT(*) FROM events $whereClause")->fetchColumn();
+$totalEventsStmt = $db->prepare("SELECT COUNT(*) FROM events $whereClause");
+$totalEventsStmt->bindParam(':fullName', $fullName, PDO::PARAM_STR);
+if ($startDate) {
+    $totalEventsStmt->bindParam(':startDate', $startDate, PDO::PARAM_STR);
+}
+if ($endDate) {
+    $totalEventsStmt->bindParam(':endDate', $endDate, PDO::PARAM_STR);
+}
+$totalEventsStmt->execute();
+$totalEvents = $totalEventsStmt->fetchColumn();
 
 // To calculate total number of pages
 $totalPages = ceil($totalEvents / $eventsPerPage);
 
-// To check if the user is logged in
-$isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
+// To check if the user is logged in and their type
+$isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'Patron';
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="TemplateMo">
@@ -213,26 +246,30 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
         border-color: #0d7b99;
     }
     </style>
-</head>
+ </head>
 
-<body>
+ <body>
     <?php include 'header.php'; ?>
 
     <div class="heading-page header-text">
         <!-- to get the space between the header and event management -->
     </div>
 
-    <form action="" method="get">
+    
+    <div class="event-container">
+        <h2>Event Management</h2>
+
+        <a href="add_event.php" class="add-event-btn">Add Event</a>
+
+        <form action="" method="get">
         <label for="startDate">Start Date:</label>
         <input type="date" id="startDate" name="startDate">
         <label for="endDate">End Date:</label>
         <input type="date" id="endDate" name="endDate">
         <button type="submit">Filter</button>
-    </form>
+     </form>
 
-    <div class="event-container">
-        <h2>Event Management</h2>
-        <a href="add_event.php" class="add-event-btn">Add Event</a>
+
         <div class="table-responsive">
             <table class="table table-bordered">
                 <table>
@@ -242,7 +279,7 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
                             <th>Date</th>
                             <th>Time</th>
                             <th>Venue</th>
-                            <th>Organizing Party</th>
+                            <th>Organizing Club</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -291,6 +328,6 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
     <!-- footer -->
     <?php include 'footer.php'; ?>
 
-</body>
+ </body>
 
-</html>
+ </html>

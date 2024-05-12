@@ -23,7 +23,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 
 <head>
-    <title>Admin Dashboard</title>
+    <title>Club Patron Dashboard</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -189,10 +189,11 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <li>
                         <hr>
                     </li>
-                    <li><a href="club_user_management.php">Club User Management</a></li>
+                    <li><a href="event_management.php">Event Management</a></li>
                     <li>
                         <hr>
                     </li>
+                    
                     <li><a href="logout.php">Logout</a></li>
                 </ul>
             </div>
@@ -207,7 +208,7 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <br>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#section1">Dashboard</a></li>
-                    <li><a href="club_user_management.php">Club Management</a></li>
+                    <li><a href="event_management.php">Event Management</a></li>
                     <li><a href="index.php">Back to Home</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul><br>
