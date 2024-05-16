@@ -18,12 +18,12 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'Lecture
 
 
 // Retrieve pending booking requests
-$stmt = $db->prepare("SELECT * FROM appointments WHERE lecturer_id = ? AND status = 'pending'");
+$stmt = $db->prepare("SELECT appointments.*, users.email FROM appointments JOIN users ON appointments.student_id = users.id WHERE lecturer_id = ? AND status = 'pending'");
 $stmt->execute([$_SESSION['user_id']]);
 $pending_bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Retrieve accepted appointments for the lecturer
-$stmt = $db->prepare("SELECT * FROM appointments WHERE lecturer_id = ? AND status = 'accepted'");
+$stmt = $db->prepare("SELECT appointments.*, users.email FROM appointments JOIN users ON appointments.student_id = users.id WHERE lecturer_id = ? AND status = 'accepted'");
 $stmt->execute([$_SESSION['user_id']]);
 $accepted_appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -44,7 +44,7 @@ foreach($accepted_appointments as $appointment) {
 
     // Add event to the events array
     $events[] = array(
-        'title' => $appointment['student_id'], // Assuming you want to display the student ID as the event title
+        'title' => $appointment['email'], // Assuming you want to display the student ID as the event title
         'start' => $start_datetime,
         'end' => $end_datetime, // Set the end time of the event
         'message' => $appointment['message'],
@@ -127,8 +127,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         z-index: 1000;
     }
         .appointment-container {
-            width: 80%;
-            max-width: 800px;
+            width: 100%;
+            
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
@@ -198,6 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
 .fc-toolbar-title {
     font-size: 20px !important;
 }
+
 
 .table-container table th:nth-child(4),
 .table-container table td:nth-child(4) {
@@ -272,7 +273,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
             </tr>
             <?php foreach($pending_bookings as $booking): ?>
                 <tr>
-                    <td><?php echo $booking['student_id']; ?></td>
+                    <td><?php echo $booking['email']; ?></td>
                     <td><?php echo $booking['date']; ?></td>
                     <td><?php echo $booking['timeslot']; ?></td>
                     <td><?php echo $booking['message']; ?></td>
