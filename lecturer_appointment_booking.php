@@ -75,9 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action'])) {
         $stmt->execute([$booking_id]);
         $booking_info = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Check if the lecturer already has an appointment scheduled for the same time
-        $stmt = $db->prepare("SELECT COUNT(*) AS count FROM appointments WHERE lecturer_id = ? AND timeslot = ? AND status = 'accepted'");
-        $stmt->execute([$booking_info['lecturer_id'], $booking_info['timeslot']]);
+        // Check if the lecturer already has an appointment scheduled for the same date and time slot
+        $stmt = $db->prepare("SELECT COUNT(*) AS count FROM appointments WHERE lecturer_id = ? AND date = ? AND timeslot = ? AND status = 'accepted'");
+        $stmt->execute([$booking_info['lecturer_id'], $booking_info['date'], $booking_info['timeslot']]);
         $existing_appointment = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($existing_appointment['count'] > 0) {
