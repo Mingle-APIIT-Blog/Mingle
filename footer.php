@@ -6,8 +6,8 @@
                     <h4>QUICK LINKS</h4>
                     <ul>
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="">Services</a></li>
-                        <li><a href="">Mentoring Sessions</a></li>
+                        <li><a href="calendar.php">Events</a></li>
+                        <li><a href="alumni_view.php">Alumni</a></li>
                         <li><a href="aboutUs.html">About Us</a></li>
                     </ul>
                 </div>

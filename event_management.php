@@ -245,6 +245,18 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_type'] === 'Patron'
         border: 1px solid #0d7b99;
         border-color: #0d7b99;
     }
+
+/* Media queries */
+@media (max-width: 768px) {
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table th, table td {
+            white-space: nowrap;
+        }
+    }
+
     </style>
  </head>
 
