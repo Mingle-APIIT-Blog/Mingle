@@ -5,7 +5,7 @@ ob_start();
 session_start();
 require_once 'db.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle'], $_FILES['blogImage'], $_POST['blogContent'], $_POST['category'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle'], $_FILES['blogImage'], $_POST['blogContent'], $_POST['categories'])) {
     // To check if user is logged in
     if (isset($_SESSION['user_id'])) {
         $blogTitle = htmlspecialchars($_POST['blogTitle']);
@@ -23,8 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle'], $_FILES['
         // Get current date and time
         $currentDate = date('Y-m-d H:i:s');
 
-        // Determine category based on selected value
-        $category = htmlspecialchars($_POST['category']);
+        // Determine categories based on selected values
+        $categories = isset($_POST['categories']) ? $_POST['categories'] : [];
+        $categoryString = implode(',', $categories);
 
         // Prepare SQL statement to insert data into the database
         $stmt = $db->prepare("INSERT INTO blog (user_id, blogTitle, blogImage, blogContent, creationDate, category) VALUES (:user_id, :blogTitle, :blogImage, :blogContent, :creationDate, :category)");
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['blogTitle'], $_FILES['
         $stmt->bindParam(':blogImage', $imageBase64); // Store image data as base64 string
         $stmt->bindParam(':blogContent', $blogContent);
         $stmt->bindParam(':creationDate', $currentDate);
-        $stmt->bindParam(':category', $category); // Bind category parameter
+        $stmt->bindParam(':category', $categoryString); // Bind category parameter
 
         // Execute the statement
         try {

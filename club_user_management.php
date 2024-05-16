@@ -178,7 +178,7 @@ $patronUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <a href="edit_club.php?id=<?php echo $user['id']; ?>" class="edit-btn">Edit</a>
                                 <!-- Delete button with link to delete_club.php and confirmation dialog -->
                                 <a href="delete_club.php?id=<?php echo $user['id']; ?>" class="delete-btn"
-                                onclick="return confirm('Are you sure you want to delete this club?')">Delete</a>
+                                onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
 
                             </td>
                     

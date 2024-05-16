@@ -55,7 +55,8 @@ if (isset($_GET['postId'])) {
                             <div class="col-lg-12">
                                 <div class="text-content">
                                     <h4><?php echo htmlspecialchars($post['author_name']); ?></h4>
-                                    <h2><?php echo htmlspecialchars($post['blogTitle']); ?></h2>
+                                    <h2><?php  echo htmlspecialchars_decode($post['blogTitle']); ?></h2>
+
                                 </div>
                             </div>
                         </div>
@@ -76,7 +77,7 @@ if (isset($_GET['postId'])) {
                         </div>
                         <div class="down-content">
                          
-                            <span><?php echo htmlspecialchars($post['blogTitle']); ?></span>
+                            <span><?php  echo htmlspecialchars_decode($post['blogTitle']); ?></span>
                            
                                 <ul class="post-info">
                                     <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a></li>
@@ -84,7 +85,8 @@ if (isset($_GET['postId'])) {
                                     <li><a href="#"><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>
                                 </ul>
                                 
-                            <p><?php echo nl2br(htmlspecialchars($post['blogContent'])); ?></p>
+                                <p><?php echo nl2br(htmlspecialchars_decode($post['blogContent'])); ?></p>
+
                         </div>
                     </div>
 
@@ -115,8 +117,8 @@ if (isset($_GET['postId'])) {
                         <h4>QUICK LINKS</h4>
                         <ul>
                             <li><a href="index.php">Home</a></li>
-                            <li><a href="">Services</a></li>
-                            <li><a href="">Mentoring Sessions</a></li>
+                            <li><a href="alumni_view.php">Alumni</a></li>
+                            
                             <li><a href="aboutUs.html">About Us</a></li>
                         </ul>
                     </div>

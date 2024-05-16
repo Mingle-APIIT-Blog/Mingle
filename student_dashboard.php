@@ -241,14 +241,14 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <div class="blog-post">
                                             <div class="blog-content">
                                                 <div class="blog-info">
-                                                    <h4><?php echo htmlspecialchars($post['blogTitle']); ?></h4>
+                                                    <h4><?php  echo htmlspecialchars_decode($post['blogTitle']); ?></h4>
                                                     <ul class="post-info">
                                                         <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a></li>
                                                         <li><a href="#"><?php echo htmlspecialchars($post['category']); ?></a></li>
                                                         <li><a href="#"><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>
                                                     </ul>
                                                 </div>
-                                                <p><?php echo htmlspecialchars($post['blogContent']); ?></p>
+                                                <p><?php echo nl2br(htmlspecialchars_decode($post['blogContent'])); ?></p>
                                                 <!-- Floating buttons for edit and delete -->
                                                 <div class="blog-actions">
                                                     <form style="display: inline;" method="post" action="delete_blog.php" onsubmit="return confirmDelete();">

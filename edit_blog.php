@@ -46,10 +46,10 @@ if (isset($_GET['postId'])) {
             <form method="post" action="edit_blog.php">
                 <label for="blogTitle">Title:</label><br>
                 <div class="update-blog-title">
-                <input type="text" id="blogTitle" name="blogTitle" value="<?php echo htmlspecialchars($blogTitle); ?>"><br>
+                <input type="text" id="blogTitle" name="blogTitle" value="<?php echo htmlspecialchars_decode($blogTitle); ?>"><br>
                 </div>
                 <label for="blogContent">Blog Content:</label><br>
-                <textarea id="blogContent" name="blogContent" rows="8"><?php echo htmlspecialchars($blogContent); ?></textarea><br>
+                <textarea id="blogContent" name="blogContent" rows="8"><?php echo nl2br(htmlspecialchars_decode($blogContent)); ?></textarea><br>
 
                 <input type="hidden" name="postId" value="<?php echo $postId; ?>">
                 <input class="update-button" type="submit" value="Update">

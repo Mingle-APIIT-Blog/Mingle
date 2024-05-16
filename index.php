@@ -8,25 +8,59 @@ require_once 'db.php';
 // To check if the user is logged in
 $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 
-// Retrieve all blog posts from the database
-if ($isLoggedIn && isset($_SESSION['user_faculty'])) {
-    // If the user is logged in and their faculty is set, filter the blog posts by faculty
-    $userFaculty = $_SESSION['user_faculty'];
 
-    $stmt = $db->prepare("SELECT b.*, u.full_name AS author_name 
-                          FROM blog b 
-                          JOIN users u ON b.user_id = u.id 
-                          WHERE u.user_faculty = :user_faculty 
-                          ORDER BY b.id DESC");
-    $stmt->bindParam(':user_faculty', $userFaculty);
-    $stmt->execute();
-    $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} else {
-    // If the user is not logged in or their faculty is not set, retrieve all blog posts
-    $stmt = $db->prepare("SELECT b.*, u.full_name AS author_name FROM blog b JOIN users u ON b.user_id = u.id ORDER BY b.id DESC");
-    $stmt->execute();
-    $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Initialize categories variable
+$categories = [];
+
+if ($isLoggedIn) {
+  $userId = $_SESSION['user_id'];
+
+  // Prepare SQL query to get user's faculty
+  $stmt = $db->prepare("SELECT user_faculty FROM users WHERE id = ?");
+  $stmt->execute([$userId]);
+  $userFaculty = $stmt->fetchColumn();
+
+  // Determine categories based on user's faculty
+  switch ($userFaculty) {
+      case 'Computing':
+          $categories = ['Programming', 'Networking', 'Software Engineering', 'Artificial Intelligence', 'Cybersecurity', 'Web Development', 'Quality Assurance' , 'Mobile Applications', 'Information Systems', 'Cloud Computing', 'Computing', 'All Faculties'];
+          break;
+      case 'Business':
+          $categories = ['Finance', 'Marketing', 'Management', 'Entrepreneurship', 'Human Resources', 'Supply Chain Management', 'E-commerce', 'Digital Marketing', 'Business Analytics', 'Operations Management', 'Business', 'All Faculties'];
+          break;
+      case 'Law':
+          $categories = ['Criminal Law', 'Civil Law', 'International Law', 'Constitutional Law', 'Environmental Law', 'Intellectual Property Law', 'Sri Law', 'Human Rights Law', 'Tax Law', 'Employment Law', 'Law', 'All Faculties'];
+          break;
+      case 'Club':
+          $categories = ['Computing', 'Business', 'Law', 'Events', 'Sports', 'All Faculties'];
+          break;    
+      default:
+          $categories = ['All Faculties'];
+          break;
+  }
 }
+
+// Retrieve blog posts from the database based on categories
+$sql = "SELECT b.*, u.full_name AS author_name 
+      FROM blog b 
+      JOIN users u ON b.user_id = u.id 
+      WHERE ";
+if (!empty($categories)) {
+  $sql .= "(";
+  foreach ($categories as $category) {
+      $sql .= "FIND_IN_SET(?, b.category) OR ";
+  }
+  $sql = rtrim($sql, 'OR ') . ") AND ";
+}
+$sql .= "1 ORDER BY b.id DESC";
+
+// Bind parameters and execute the query
+$params = $categories;
+
+$stmt = $db->prepare($sql);
+$stmt->execute($params);
+$blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 // Error handling for database query
 if (!$stmt) {
@@ -155,7 +189,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                   </div>
                   <div class="down-content">
                     <a href="post_details.php?postId=<?php echo $post['id']; ?>">
-                      <span><?php echo htmlspecialchars($post['blogTitle']); ?></span>
+                      <span><?php  echo htmlspecialchars_decode($post['blogTitle']); ?></span>
                     </a> 
                     <ul class="post-info">
                        <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a></li>
@@ -163,10 +197,11 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                        <li><a href="#"><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>
                     </ul>
                     <?php
-                    // Extracting only the first sentence from the blog content
-                    $firstSentence = strtok($post['blogContent'], '.');
-                    echo "<p>$firstSentence</p>";
-                    ?>
+// Extracting only the first sentence from the blog content
+$firstSentence = strtok($post['blogContent'], '.');
+echo "<p>" . htmlspecialchars_decode(htmlspecialchars_decode($firstSentence)) . "</p>";
+?>
+
                   </div>
                 </div>
               </div>
@@ -209,7 +244,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                                                 <?php foreach ($searchResults as $result) { ?>
                                                 <li>
                                                     <a href="post_details.php?postId=<?php echo $result['id']; ?>">
-                                                        <h5><?php echo htmlspecialchars($result['blogTitle']); ?></h5>
+                                                        <h5><?php  echo htmlspecialchars_decode($post['blogTitle']); ?></h5>
                                                         <span><?php echo htmlspecialchars($result['category']); ?> |
                                                             <?php echo date('M d, Y', strtotime($result['creationDate'])); ?></span>
                                                     </a>
@@ -238,7 +273,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                                                 ?>
                                                 <li>
                                                     <a href="post_details.php?postId=<?php echo $post['id']; ?>">
-                                                        <h5><?php echo htmlspecialchars($post['blogTitle']); ?></h5>
+                                                        <h5><?php  echo htmlspecialchars_decode($post['blogTitle']); ?></h5>
                                                         <span><?php echo htmlspecialchars($post['category']); ?> |
                                                             <?php echo date('M d, Y', strtotime($post['creationDate'])); ?></span>
                                                     </a>

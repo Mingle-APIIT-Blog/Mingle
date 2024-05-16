@@ -189,6 +189,10 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <li>
                         <hr>
                     </li>
+                    <li><a href="upload-blog-form.php">Upload Blogs</a></li>
+                    <li>
+                        <hr>
+                    </li>
                     <li><a href="event_management.php">Event Management</a></li>
                     <li>
                         <hr>
@@ -208,13 +212,13 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <br>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#section1">Dashboard</a></li>
+                    <li><a href="upload-blog-form.php">Upload Blogs</a></li>
                     <li><a href="event_management.php">Event Management</a></li>
                     <li><a href="index.php">Back to Home</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul><br>
             </div>
             <br>
-
             <div class="col-sm-9">
                 <div class="well">
                     <h4>Welcome</h4>
@@ -225,6 +229,39 @@ $blogPosts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="well">
                             <div class="content">
 
+                                <div class="blog-container">
+                                    <!-- Blog Posts Loop - To display user specific blog post-->
+                                    <?php foreach ($blogPosts as $post) : ?>
+                                        <div class="blog-post">
+                                            <div class="blog-content">
+                                                <div class="blog-info">
+                                                    <h4><?php  echo htmlspecialchars_decode($post['blogTitle']); ?></h4>
+                                                    <ul class="post-info">
+                                                        <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a></li>
+                                                        <li><a href="#"><?php echo htmlspecialchars($post['category']); ?></a></li>
+                                                        <li><a href="#"><?php echo date('M d, Y', strtotime($post['creationDate'])); ?></a></li>
+                                                    </ul>
+                                                </div>
+                                                <p><?php echo nl2br(htmlspecialchars_decode($post['blogContent'])); ?></p>
+                                                <!-- Floating buttons for edit and delete -->
+                                                <div class="blog-actions">
+                                                    <form style="display: inline;" method="post" action="delete_blog.php" onsubmit="return confirmDelete();">
+                                                        <input type="hidden" name="blog_id" value="<?php echo $post['id']; ?>">
+                                                        <button type="submit"><i class="fas fa-trash-alt"></i></button> <!-- Delete icon -->
+                                                    </form>
+
+                                                    <a href="edit_blog.php?postId=<?php echo $post['id']; ?>"><button><i class="fas fa-edit"></i></button></a> <!-- Edit icon -->
+                                                </div>
+                                            </div>
+                                            <div class="blog-thumb">
+                                                <?php if (!empty($post['blogImage'])) : ?>
+                                                    <!-- Display the image if blogImage is not empty -->
+                                                    <img src="data:image/jpeg;base64,<?php echo $post['blogImage']; ?>" alt="Blog Image">
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
                         </div>
                     </div>

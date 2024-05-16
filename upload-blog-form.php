@@ -36,6 +36,29 @@ if (isset($_SESSION['form_data'])) {
         border-radius: 5px;
         box-sizing: border-box;
     }
+
+    /* Checkbox container */
+    .checkbox-container {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    /* Checkbox label */
+    .checkbox-container label {
+        display: block;
+    }
+
+    /* Checkbox input */
+    .checkbox-container input {
+        margin-right: 5px;
+    }
+    .low-font-weight {
+        font-weight: lighter;
+    }
+    .column-container {
+        width: 33.33%;
+        float: left;
+    }
     </style>
 </head>
 
@@ -47,46 +70,50 @@ if (isset($_SESSION['form_data'])) {
             <label for="blogTitle">Blog Title:</label><br>
             <input type="text" id="blogTitle" name="blogTitle" value="<?php echo htmlspecialchars($blogTitle); ?>"><br>
 
-            <!-- Blog category selection -->
-            <label for="category">Category:</label><br>
-            <select id="category" name="category" required>
-            <option value="" selected disabled>Select a category</option> <!-- Placeholder option -->
-                <?php
-                // Retrieving user's faculty information from the database
-                if (isset($_SESSION['user_id'])) {
-                    $userId = $_SESSION['user_id'];
-                    $stmt = $db->prepare("SELECT user_faculty FROM users WHERE id = :user_id");
-                    $stmt->bindParam(':user_id', $userId);
-                    $stmt->execute();
-                    $userFaculty = $stmt->fetchColumn();
+            <!-- Blog category selection using checkboxes -->
+            <label>Category:</label><br>
+            <?php
+            // Retrieving user's faculty information from the database
+            if (isset($_SESSION['user_id'])) {
+                $userId = $_SESSION['user_id'];
+                $stmt = $db->prepare("SELECT user_faculty FROM users WHERE id = :user_id");
+                $stmt->bindParam(':user_id', $userId);
+                $stmt->execute();
+                $userFaculty = $stmt->fetchColumn();
 
-                    // To determine category options based on user's faculty
-                    switch ($userFaculty) {
-                        case 'Computing':
-                            $categories = ['Programming', 'Networking', 'Software Engineering','Events', 'Sports', 'General'];
+                // To determine category options based on user's faculty
+                switch ($userFaculty) {
+                    case 'Computing':
+                        $categories = ['Programming', 'Networking', 'Software Engineering', 'Artificial Intelligence', 'Cybersecurity', 'Web Development', 'Quality Assurance' , 'Mobile Applications', 'Information Systems', 'Cloud Computing', 'Computing', 'All Faculties'];
+                        break;
+                    case 'Business':
+                        $categories = ['Finance', 'Marketing', 'Management', 'Entrepreneurship', 'Human Resources', 'Supply Chain Management', 'E-commerce', 'Digital Marketing', 'Business Analytics', 'Operations Management', 'Business', 'All Faculties'];
+                        break;
+                    case 'Law':
+                        $categories = ['Criminal Law', 'Civil Law', 'International Law', 'Constitutional Law', 'Environmental Law', 'Intellectual Property Law', 'Sri Law', 'Human Rights Law', 'Tax Law', 'Employment Law', 'Law', 'All Faculties'];
+                        break;
+                    case 'Club':
+                            $categories = ['Computing', 'Business', 'Law', 'Events', 'Sports', 'All Faculties'];
                             break;
-                        case 'Business':
-                            $categories = ['Finance', 'Marketing', 'Management', 'Events', 'Sports', 'General'];
-                            break;
-                        case 'Law':
-                            $categories = ['Criminal Law', 'Civil Law', 'International Law','Events', 'Sports', 'General'];
-                            break;
-                        default:
-                            $categories = ['Events', 'Sports', 'General'];
-                            break;
-                    }
-
-                    // Prepare category options for HTML select element
-                    $categoryOptions = '';
-                    foreach ($categories as $category) {
-                        $categoryOptions .= "<option value='$category'>$category</option>";
-                    }
-
-                    // Output category options
-                    echo $categoryOptions;
                 }
-                ?>
-            </select><br>
+
+                echo "<div class='column-container'>";
+                $categories_per_column = ceil(count($categories) / 3); // Calculate how many categories should be in each column
+                $current_column_count = 0;
+
+                foreach ($categories as $category) {
+                    if ($current_column_count % $categories_per_column == 0 && $current_column_count != 0) {
+                        echo "</div><div class='column-container'>"; // Start a new column
+                    }
+
+                    echo "<label class='low-font-weight'><input type='checkbox' name='categories[]' value='$category'> $category</label><br>";
+                    $current_column_count++;
+                }
+                
+
+                echo "</div>"; // Close the last column
+            }
+            ?><br><br>
 
             <label for="blogImage">Blog Image</label><br>
             <input type="file" id="blogImage" name="blogImage" accept=".png, .jpg, .jpeg, .svg, .gif"><br>
@@ -107,10 +134,16 @@ if (isset($_SESSION['form_data'])) {
             var title = document.getElementById('blogTitle').value.trim();
             var image = document.getElementById('blogImage').value.trim();
             var content = document.getElementById('blogContent').value.trim();
+            var checkboxes = document.querySelectorAll('input[name="categories[]"]:checked');
 
             if (title === '' || image === '' || content === '') {
                 document.getElementById('errorMessage').innerText = 'Please fill in all fields.';
                 return false; // To prevent form submission with empty fields
+            }
+
+            if (checkboxes.length === 0) {
+            document.getElementById('errorMessage').innerText = 'Please select at least one category.';
+            return false; // To prevent form submission with no categories selected
             }
 
             var allowedExtensions = /(\.png|\.jpg|\.jpeg|\.svg|\.gif)$/i;
