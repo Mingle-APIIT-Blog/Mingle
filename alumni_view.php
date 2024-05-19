@@ -149,7 +149,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                                     </div>
                                     <div class="down-content">
                                         <a href="post_details.php?postId=<?php echo $post['id']; ?>">
-                                            <span><?php echo htmlspecialchars($post['blogTitle']); ?></span>
+                                            <span><?php echo htmlspecialchars_decode($post['blogTitle']); ?></span>
                                         </a>
                                         <ul class="post-info">
                                             <li><a href="#"><?php echo htmlspecialchars($post['author_name']); ?></a>
@@ -160,10 +160,14 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                                             </li>
                                         </ul>
                                         <?php
+                                        
+                                        
                                         // Extracting only the first sentence from the blog content
                                         $firstSentence = strtok($post['blogContent'], '.');
-                                        echo "<p>$firstSentence</p>";
+                                        echo "<p>" . htmlspecialchars_decode(htmlspecialchars_decode($firstSentence)) . "</p>";
                                         ?>
+
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +210,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                                                 <?php foreach ($searchResults as $result) { ?>
                                                 <li>
                                                     <a href="post_details.php?postId=<?php echo $result['id']; ?>">
-                                                        <h5><?php echo htmlspecialchars($result['blogTitle']); ?></h5>
+                                                        <h5><?php echo htmlspecialchars_decode($result['blogTitle']); ?></h5>
                                                         <span><?php echo htmlspecialchars($result['category']); ?> |
                                                             <?php echo date('M d, Y', strtotime($result['creationDate'])); ?></span>
                                                     </a>
@@ -235,7 +239,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                                                 ?>
                                                 <li>
                                                     <a href="post_details.php?postId=<?php echo $post['id']; ?>">
-                                                        <h5><?php echo htmlspecialchars($post['blogTitle']); ?></h5>
+                                                        <h5><?php echo htmlspecialchars_decode($post['blogTitle']); ?></h5>
                                                         <span><?php echo htmlspecialchars($post['category']); ?> |
                                                             <?php echo date('M d, Y', strtotime($post['creationDate'])); ?></span>
                                                     </a>
