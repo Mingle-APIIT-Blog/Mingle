@@ -225,7 +225,7 @@ require_once 'db.php';
                     </div>
                 </div>
                 <div class="mt-3" style="padding-left: 3px;">
-                    <p>Already have an account? Click here to log in. <a href="login.html"
+                    <p>Already have an account? Click here to <a href="login.html"
                             style="color: #1ea5c3;">Login</a></p>
                 </div>
             </div>
