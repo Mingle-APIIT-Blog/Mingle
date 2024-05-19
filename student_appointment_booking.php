@@ -55,9 +55,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_booking'])) {
 
 
 
-
-// Query to fetch available lecturers from the same faculty as the student
-$stmt = $db->prepare("SELECT id, username FROM users WHERE user_type = 'lecturer' AND user_faculty = (SELECT user_faculty FROM users WHERE id = ?)");
+// Query to fetch available lecturers from the same faculty as the student and include a specific lecturer
+$stmt = $db->prepare("
+    SELECT id, username 
+    FROM users 
+    WHERE user_type = 'lecturer' 
+    AND (user_faculty = (SELECT user_faculty FROM users WHERE id = ?) 
+    OR email = 'kaushali@apiit.lk')
+    GROUP BY id, username
+");
 $stmt->execute([$_SESSION['user_id']]);
 $lecturers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
