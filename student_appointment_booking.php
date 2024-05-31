@@ -29,8 +29,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'Student') {
 }
 
 
-// Initialize success and error messages
-$success_message = $error_message = '';
+$success_message = '';
+$error_message = '';
 
 // Check if the student has submitted a booking request
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_booking'])) {
@@ -40,16 +40,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_booking'])) {
     $timeslot = $_POST['timeslot'];
     $message = $_POST['message'];
 
-    // Insert booking request into database
-    try {
-        $stmt = $db->prepare("INSERT INTO appointments (student_id, lecturer_id, date, timeslot, message) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$_SESSION['user_id'], $lecturer_id, $booking_date, $timeslot, $message]);
-        $success_message = "Booking request submitted successfully!";
-        // Redirect to prevent form resubmission on page refresh
-        header("Location: ".$_SERVER['PHP_SELF']);
-        exit();
-    } catch(PDOException $e) {
-        $error_message = "Error: " . $e->getMessage();
+    // Check if the lecturer already has an appointment scheduled for the same date and time slot
+    $stmt = $db->prepare("SELECT COUNT(*) AS count FROM appointments WHERE lecturer_id = ? AND date = ? AND timeslot = ? AND status = 'accepted'");
+    $stmt->execute([$lecturer_id, $booking_date, $timeslot]);
+    $existing_appointment = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($existing_appointment['count'] > 0) {
+        $error_message = "The lecturer already has an appointment scheduled for this time.";
+    } else {
+        // Insert booking request into the database
+        try {
+            $stmt = $db->prepare("INSERT INTO appointments (student_id, lecturer_id, date, timeslot, message) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$_SESSION['user_id'], $lecturer_id, $booking_date, $timeslot, $message]);
+            $success_message = "Booking request submitted successfully!";
+            // Redirect to prevent form resubmission on page refresh
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        } catch (PDOException $e) {
+            $error_message = "Error: " . $e->getMessage();
+        }
     }
 }
 
@@ -271,9 +280,7 @@ tr:hover {
         <div><?php echo $success_message; ?></div>
     <?php endif; ?>
 
-    <?php if(isset($error_message)): ?>
-        <div><?php echo $error_message; ?></div>
-    <?php endif; ?>
+   
 
     <div class="booking-container">
     <div class="card">
@@ -282,9 +289,9 @@ tr:hover {
             </div>
 <br>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <label for="lecturer">Select Lecturer:</label>
+                <label for="lecturer">Select Lecturer / Head of SSS:</label>
                 <select name="lecturer" id="lecturer" required>
-                <option value="">Select a lecturer</option>
+                <option value="">Select</option>
                     <?php foreach($lecturers as $lecturer): ?>
                         <option value="<?php echo $lecturer['id']; ?>"><?php echo $lecturer['username']; ?></option>
                     <?php endforeach; ?>
@@ -312,8 +319,10 @@ tr:hover {
          </select><br><br>
 
         <label for="message">Reason for Booking:</label><br>
-        <textarea name="message" id="message" rows="3" style="width: calc(100% - 16px);" placeholder="Please type the reason for booking this appointment" required></textarea><br><br>
-
+        <textarea name="message" id="message" rows="3" style="width: calc(100% - 12px);" placeholder="Please mention the reason for this booking and the type of meeting preffered (Online/Physical)." required></textarea><br><br>
+        <?php if(!empty($error_message)): ?>
+    <div id="error-container" class="alert alert-danger" role="alert"><?php echo $error_message; ?></div>
+<?php endif; ?>
 
         <button id='submitRequest' type="submit" name="submit_booking">Submit Booking Request</button>
     </form>
