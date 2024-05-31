@@ -149,8 +149,8 @@ if ($isLoggedIn) {
         <label for="eventVenue">Venue:</label>
         <input type="text" id="eventVenue" name="eventVenue" required><br><br>
 
-        <label for="organizingParty">Organizing Club:</label>
-<input type="text" id="organizingParty" name="organizingParty" value="<?php echo isset($_SESSION['full_name']) ? htmlspecialchars($_SESSION['full_name']) : ''; ?>" readonly><br><br>
+       
+<input type="text" id="organizingParty" name="organizingParty" value="<?php echo isset($_SESSION['full_name']) ? htmlspecialchars($_SESSION['full_name']) : ''; ?>" readonly style="display:none;">
 
         <button type="submit">Save Event</button>
     </form>
