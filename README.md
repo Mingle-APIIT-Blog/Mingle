@@ -66,7 +66,7 @@ Users can select categories for their blog posts based on their registered facul
 
 Through these personalized features, we aim to provide a tailored and efficient blogging experience for our users.
 
-## Sprint 2 - Agile Team
+## Sprint 3 - Agile Team
 
 - **Scrum Master**  - [Maleesa Hettiarachchi](https://github.com/Maleesanat01) 
 - **Developer**  - [Amanaah Hisham](https://github.com/amaanah-hisham)
@@ -74,9 +74,10 @@ Through these personalized features, we aim to provide a tailored and efficient 
 - **BA**  - [Chanjana Wijesekara](https://github.com/Chanjana) 
 
 ## Sprint 3 Key Features
-### Club patron user management 
-### Appointment Booking
-### Refined Blog Categorization
-### Refined Content Recommendation
-### Refined Event Calendar
+1.	Club patron user management 
+2.	Appointment Booking
+3.	Refined Blog Categorization
+4.	Refined Content Recommendation
+5.	Refined Event Calendar
+
 
