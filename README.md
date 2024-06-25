@@ -65,3 +65,18 @@ This feature provides users with personalized blog recommendations based on thei
 Users can select categories for their blog posts based on their registered faculty. Categories are unique to different faculties, ensuring that content is organized logically and users can quickly identify relevant posts.
 
 Through these personalized features, we aim to provide a tailored and efficient blogging experience for our users.
+
+## Sprint 2 - Agile Team
+
+- **Scrum Master**  - [Maleesa Hettiarachchi](https://github.com/Maleesanat01) 
+- **Developer**  - [Amanaah Hisham](https://github.com/amaanah-hisham)
+- **QA**  - [Hajara Mumtaz](https://github.com/haj05m) 
+- **BA**  - [Chanjana Wijesekara](https://github.com/Chanjana) 
+
+## Sprint 3 Key Features
+### Club patron user management 
+### Appointment Booking
+### Refined Blog Categorization
+### Refined Content Recommendation
+### Refined Event Calendar
+
