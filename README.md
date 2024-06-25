@@ -9,9 +9,7 @@
    5.1. [Personalized Features](#personalized-features)
 
 ## Introduction
-This repository consists of my contribution to an agile-based blog platform built using HTML, CSS, PHP, JavaScript, and PhpMyAdmin. The project follows the agile methodology, with the team progressing through agile phases that include project planning, requirement gathering & analysis, sprint planning, sprints and reviews.
-
-Currently, the repository contains the shippable product of Sprint 1, which includes essential features such as user authentication and authorization, as well as blog management functionalities (CRUD operations). Users can sign up, log in securely, and manage their blogs seamlessly through this platform.
+This repository consists of an agile-based blog platform built using HTML, CSS, PHP, JavaScript, and PhpMyAdmin. The project follows the agile methodology, with the team progressing through agile phases that include project planning, requirement gathering & analysis, sprint planning, sprints and reviews.
 
 Our team is dedicated to delivering a user-friendly and robust blogging experience.
 Visit the team's organization -> Mingle: APIIT Blog
